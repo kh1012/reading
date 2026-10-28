@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 370" width="100%" height="100%">
+  <rect width="640" height="370" fill="#ffffff"/>
+  
+  <!-- AbortController Box -->
+  <rect x="30" y="40" width="230" height="200" rx="8" fill="#f8fafc" stroke="#2563eb" stroke-width="2"/>
+  <rect x="30" y="40" width="230" height="36" rx="8" fill="#2563eb"/>
+  <text x="145" y="63" font-family="sans-serif" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">AbortController (제어자)</text>
+  
+  <rect x="45" y="90" width="200" height="42" rx="4" fill="#ffffff" stroke="#1f2937" stroke-width="1"/>
+  <text x="55" y="108" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937">내부 슬롯: [[Signal]]</text>
+  <text x="55" y="124" font-family="sans-serif" font-size="12" fill="#2563eb">AbortSignal 인스턴스 참조</text>
+  
+  <rect x="45" y="145" width="200" height="42" rx="4" fill="#ffffff" stroke="#dc2626" stroke-width="1"/>
+  <text x="55" y="163" font-family="sans-serif" font-size="12" font-weight="bold" fill="#dc2626">메서드: abort(reason)</text>
+  <text x="55" y="179" font-family="sans-serif" font-size="12" fill="#1f2937">취소 절차(Abort steps) 트리거</text>
+
+  <rect x="45" y="198" width="200" height="30" rx="4" fill="#ffffff" stroke="#1f2937" stroke-width="1"/>
+  <text x="55" y="218" font-family="sans-serif" font-size="12" fill="#1f2937">속성: readonly signal</text>
+
+  <!-- Arrow Controller to Signal -->
+  <path d="M 260 110 L 320 110" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <text x="290" y="102" font-family="sans-serif" font-size="11" fill="#2563eb" text-anchor="middle">소유</text>
+
+  <path d="M 260 166 L 320 166" stroke="#dc2626" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrow-red)"/>
+  <text x="290" y="158" font-family="sans-serif" font-size="11" fill="#dc2626" text-anchor="middle">트리거</text>
+
+  <!-- AbortSignal Box -->
+  <rect x="330" y="40" width="280" height="200" rx="8" fill="#f8fafc" stroke="#1f2937" stroke-width="2"/>
+  <rect x="330" y="40" width="280" height="36" rx="8" fill="#1f2937"/>
+  <text x="470" y="63" font-family="sans-serif" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">AbortSignal (EventTarget 상속)</text>
+  
+  <rect x="345" y="86" width="250" height="36" rx="4" fill="#ffffff" stroke="#1f2937" stroke-width="1"/>
+  <text x="355" y="103" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937">aborted</text>
+  <text x="415" y="103" font-family="sans-serif" font-size="12" fill="#16a34a">false</text>
+  <text x="450" y="103" font-family="sans-serif" font-size="12" fill="#1f2937">→</text>
+  <text x="470" y="103" font-family="sans-serif" font-size="12" font-weight="bold" fill="#dc2626">true (취소 시)</text>
+  <text x="355" y="116" font-family="sans-serif" font-size="10" fill="#1f2937">상태 불변 전환 플래그</text>
+
+  <rect x="345" y="128" width="250" height="32" rx="4" fill="#ffffff" stroke="#1f2937" stroke-width="1"/>
+  <text x="355" y="148" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937">reason</text>
+  <text x="415" y="148" font-family="sans-serif" font-size="12" fill="#dc2626">AbortError DOMException</text>
+
+  <rect x="345" y="166" width="250" height="32" rx="4" fill="#ffffff" stroke="#1f2937" stroke-width="1"/>
+  <text x="355" y="186" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937">abort algorithms</text>
+  <text x="465" y="186" font-family="sans-serif" font-size="11" fill="#2563eb">중단 핸들러 Set 순차 실행</text>
+
+  <rect x="345" y="204" width="250" height="26" rx="4" fill="#ffffff" stroke="#1f2937" stroke-width="1"/>
+  <text x="355" y="221" font-family="sans-serif" font-size="11" fill="#1f2937">이벤트: onabort 디스패치</text>
+
+  <!-- Consumers (Bottom Box) -->
+  <rect x="30" y="260" width="580" height="95" rx="8" fill="#f8fafc" stroke="#16a34a" stroke-width="2"/>
+  <rect x="30" y="260" width="580" height="26" rx="8" fill="#16a34a"/>
+  <text x="320" y="278" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">비동기 작업 소비자 (Consumers - signal 주입)</text>
+
+  <rect x="45" y="296" width="165" height="46" rx="4" fill="#ffffff" stroke="#1f2937" stroke-width="1"/>
+  <text x="55" y="314" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937">fetch(url, { signal })</text>
+  <text x="55" y="332" font-family="sans-serif" font-size="11" fill="#dc2626">소켓 중단 / 스트림 정리</text>
+
+  <rect x="230" y="296" width="185" height="46" rx="4" fill="#ffffff" stroke="#1f2937" stroke-width="1"/>
+  <text x="240" y="314" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937">addEventListener({ signal })</text>
+  <text x="240" y="332" font-family="sans-serif" font-size="11" fill="#dc2626">자동 removeEventListener</text>
+
+  <rect x="435" y="296" width="165" height="46" rx="4" fill="#ffffff" stroke="#1f2937" stroke-width="1"/>
+  <text x="445" y="314" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937">signal.throwIfAborted()</text>
+  <text x="445" y="332" font-family="sans-serif" font-size="11" fill="#dc2626">다단계 연산 조기 탈출</text>
+
+  <!-- Arrow Signal to Consumers -->
+  <path d="M 470 240 L 470 260" stroke="#16a34a" stroke-width="2" marker-end="url(#arrow-green)"/>
+  
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb" />
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#dc2626" />
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#16a34a" />
+    </marker>
+  </defs>
+</svg>
