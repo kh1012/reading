@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360">
+  <rect width="640" height="360" fill="#ffffff" />
+  <rect x="15" y="15" width="610" height="330" rx="8" fill="none" stroke="#1f2937" stroke-width="2" />
+  <text x="35" y="42" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1f2937">FileSystemSyncAccessHandle 동기 I/O 및 배타적 락 메커니즘</text>
+
+  <!-- Left: Invocation Step -->
+  <rect x="35" y="65" width="180" height="260" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="1.5" />
+  <text x="48" y="90" font-family="sans-serif" font-size="13" font-weight="bold" fill="#2563eb">1. 핸들 생성 단계</text>
+  <text x="48" y="115" font-family="sans-serif" font-size="12" fill="#1f2937">fileHandle</text>
+  <text x="48" y="133" font-family="sans-serif" font-size="12" fill="#1f2937">.createSyncAccessHandle()</text>
+  <text x="48" y="165" font-family="sans-serif" font-size="12" fill="#16a34a">배타적 락 획득 성공</text>
+  <text x="48" y="195" font-family="sans-serif" font-size="12" fill="#dc2626">타 컨텍스트 동시 접근 시:</text>
+  <text x="48" y="215" font-family="sans-serif" font-size="12" fill="#dc2626">NoModification-</text>
+  <text x="48" y="233" font-family="sans-serif" font-size="12" fill="#dc2626">AllowedError 발생</text>
+  <text x="48" y="270" font-family="sans-serif" font-size="12" fill="#1f2937">Chrome 121+ 완화:</text>
+  <text x="48" y="290" font-family="sans-serif" font-size="12" fill="#2563eb">mode: 'read-only'</text>
+
+  <!-- Middle: Synchronous Operations -->
+  <rect x="230" y="65" width="180" height="260" rx="6" fill="#ffffff" stroke="#16a34a" stroke-width="1.5" />
+  <text x="243" y="90" font-family="sans-serif" font-size="13" font-weight="bold" fill="#16a34a">2. 순수 동기 I/O 메서드</text>
+  <text x="243" y="115" font-family="sans-serif" font-size="12" fill="#1f2937">write(buf, { at: offset })</text>
+  <text x="243" y="133" font-family="sans-serif" font-size="12" fill="#16a34a">-> 바이트 제자리 수정</text>
+  <text x="243" y="160" font-family="sans-serif" font-size="12" fill="#1f2937">read(buf, { at: offset })</text>
+  <text x="243" y="178" font-family="sans-serif" font-size="12" fill="#16a34a">-> 임의 오프셋 탐색</text>
+  <text x="243" y="205" font-family="sans-serif" font-size="12" fill="#1f2937">flush()</text>
+  <text x="243" y="223" font-family="sans-serif" font-size="12" fill="#16a34a">-> fsync 물리 반영</text>
+  <text x="243" y="250" font-family="sans-serif" font-size="12" fill="#1f2937">truncate(size)</text>
+  <text x="243" y="268" font-family="sans-serif" font-size="12" fill="#16a34a">-> 원자적 크기 변경</text>
+  <text x="243" y="295" font-family="sans-serif" font-size="12" fill="#1f2937">getSize() -> 크기 반환</text>
+
+  <!-- Right: Release Step -->
+  <rect x="425" y="65" width="180" height="260" rx="6" fill="#ffffff" stroke="#1f2937" stroke-width="1.5" />
+  <text x="438" y="90" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1f2937">3. 자원 해제 및 종료</text>
+  <text x="438" y="115" font-family="sans-serif" font-size="12" fill="#1f2937">try {</text>
+  <text x="450" y="135" font-family="sans-serif" font-size="12" fill="#1f2937">// 동기 I/O 작업 수행</text>
+  <text x="438" y="155" font-family="sans-serif" font-size="12" fill="#1f2937">} finally {</text>
+  <text x="450" y="175" font-family="sans-serif" font-size="12" font-weight="bold" fill="#dc2626">accessHandle.close()</text>
+  <text x="438" y="195" font-family="sans-serif" font-size="12" fill="#1f2937">}</text>
+  <text x="438" y="230" font-family="sans-serif" font-size="12" fill="#16a34a">배타적 락 즉시 해제</text>
+  <text x="438" y="255" font-family="sans-serif" font-size="12" fill="#1f2937">타 워커/탭 접근 재개</text>
+  <text x="438" y="285" font-family="sans-serif" font-size="12" fill="#dc2626">close 미호출 시</text>
+  <text x="438" y="303" font-family="sans-serif" font-size="12" fill="#dc2626">Stale Lock 잔존 위험</text>
+</svg>
