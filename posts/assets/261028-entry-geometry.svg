@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 380" width="640" height="380">
+  <rect width="640" height="380" fill="#ffffff"/>
+  <text x="24" y="30" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1f2937">IntersectionObserverEntry 객체의 기하학적 데이터 구조</text>
+  <rect x="40" y="55" width="340" height="200" fill="#eff6ff" stroke="#2563eb" stroke-width="2" rx="4"/>
+  <text x="55" y="80" font-family="sans-serif" font-size="13" font-weight="bold" fill="#2563eb">rootBounds (DOMRectReadOnly)</text>
+  <text x="55" y="100" font-family="sans-serif" font-size="12" fill="#1f2937">루트 또는 뷰포트의 경계 사각형</text>
+  <rect x="180" y="150" width="180" height="180" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" rx="4"/>
+  <text x="195" y="315" font-family="sans-serif" font-size="13" font-weight="bold" fill="#16a34a">boundingClientRect</text>
+  <rect x="180" y="150" width="180" height="105" fill="#fee2e2" stroke="#dc2626" stroke-width="2" rx="2"/>
+  <text x="195" y="185" font-family="sans-serif" font-size="13" font-weight="bold" fill="#dc2626">intersectionRect</text>
+  <text x="195" y="205" font-family="sans-serif" font-size="12" fill="#dc2626">실제 겹치는 기하학적 교차 영역</text>
+  <rect x="400" y="55" width="210" height="275" fill="#f9fafb" stroke="#1f2937" stroke-width="1.5" rx="6"/>
+  <text x="415" y="85" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1f2937">주요 속성 필드 및 타입</text>
+  <text x="415" y="115" font-family="sans-serif" font-size="12" font-weight="bold" fill="#2563eb">isIntersecting</text>
+  <text x="415" y="132" font-family="sans-serif" font-size="12" fill="#1f2937">교차 여부 불리언 (true / false)</text>
+  <text x="415" y="160" font-family="sans-serif" font-size="12" font-weight="bold" fill="#dc2626">intersectionRatio</text>
+  <text x="415" y="177" font-family="sans-serif" font-size="12" fill="#1f2937">면적 교차율 (0.0 ~ 1.0)</text>
+  <text x="415" y="205" font-family="sans-serif" font-size="12" font-weight="bold" fill="#16a34a">target</text>
+  <text x="415" y="222" font-family="sans-serif" font-size="12" fill="#1f2937">관찰 대상 Element 노드</text>
+  <text x="415" y="250" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937">time</text>
+  <text x="415" y="267" font-family="sans-serif" font-size="12" fill="#1f2937">발생 시각 (DOMHighResTimeStamp)</text>
+  <text x="415" y="295" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937">rootBounds</text>
+  <text x="415" y="312" font-family="sans-serif" font-size="12" fill="#1f2937">루트 마진 적용 사각형</text>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" width="640" height="400">
+  <rect width="640" height="400" fill="#ffffff"/>
+  <text x="24" y="32" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1f2937">Intersection Observer 공간 모델 구조도</text>
+  <rect x="50" y="55" width="540" height="230" fill="#eff6ff" stroke="#2563eb" stroke-width="2" stroke-dasharray="6,4" rx="4"/>
+  <text x="65" y="75" font-family="sans-serif" font-size="12" font-weight="bold" fill="#2563eb">rootMargin 확장 영역 (가상 교차 판정 경계)</text>
+  <rect x="90" y="90" width="460" height="160" fill="#ffffff" stroke="#1f2937" stroke-width="2" rx="4"/>
+  <text x="105" y="112" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1f2937">루트 컨테이너 (root / 브라우저 뷰포트)</text>
+  <rect x="220" y="190" width="200" height="150" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" rx="4"/>
+  <text x="235" y="325" font-family="sans-serif" font-size="13" font-weight="bold" fill="#16a34a">타깃 요소 (target element)</text>
+  <rect x="220" y="190" width="200" height="60" fill="#fee2e2" stroke="#dc2626" stroke-width="2" rx="2"/>
+  <text x="245" y="225" font-family="sans-serif" font-size="12" font-weight="bold" fill="#dc2626">교차 영역 (intersectionRect)</text>
+  <line x1="28" y1="55" x2="28" y2="90" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="35" y="75" font-family="sans-serif" font-size="12" fill="#2563eb">rootMargin 상단 오프셋</text>
+  <line x1="28" y1="250" x2="28" y2="285" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="35" y="270" font-family="sans-serif" font-size="12" fill="#2563eb">rootMargin 하단 오프셋</text>
+  <rect x="50" y="305" width="150" height="65" fill="#f9fafb" stroke="#1f2937" stroke-width="1" rx="4"/>
+  <text x="60" y="328" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937">교차율 (threshold)</text>
+  <text x="60" y="350" font-family="sans-serif" font-size="12" fill="#1f2937">교차 면적 / 타깃 면적</text>
+  <rect x="440" y="305" width="150" height="65" fill="#f9fafb" stroke="#1f2937" stroke-width="1" rx="4"/>
+  <circle cx="455" cy="325" r="5" fill="#2563eb"/>
+  <text x="468" y="329" font-family="sans-serif" font-size="12" fill="#1f2937">root / rootMargin</text>
+  <circle cx="455" cy="348" r="5" fill="#dc2626"/>
+  <text x="468" y="352" font-family="sans-serif" font-size="12" fill="#1f2937">intersectionRect</text>
+</svg>
