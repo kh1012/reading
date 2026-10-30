@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 280" width="640" height="280">
+  <rect width="640" height="280" fill="#ffffff"/>
+  <text x="30" y="28" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1f2937">메인 스레드 양보 및 재개 메커니즘 비교</text>
+
+  <!-- Legacy setTimeout section -->
+  <rect x="30" y="42" width="580" height="100" rx="6" fill="#ffffff" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="45" y="64" font-family="sans-serif" font-size="13" font-weight="bold" fill="#dc2626">레거시: setTimeout(fn, 0) - 연속성 결핍(Continuation Starvation)</text>
+  
+  <rect x="45" y="76" width="130" height="50" rx="4" fill="#ffffff" stroke="#1f2937" stroke-width="1"/>
+  <text x="55" y="96" font-family="sans-serif" font-size="12" fill="#1f2937">긴 작업 실행 중</text>
+  <text x="55" y="114" font-family="sans-serif" font-size="12" fill="#1f2937">setTimeout 양보</text>
+
+  <line x1="180" y1="101" x2="210" y2="101" stroke="#dc2626" stroke-width="2"/>
+  <polygon points="210,97 218,101 210,105" fill="#dc2626"/>
+
+  <rect x="223" y="76" width="180" height="50" rx="4" fill="#ffffff" stroke="#dc2626" stroke-width="1"/>
+  <text x="233" y="96" font-family="sans-serif" font-size="12" fill="#dc2626">매크로태스크 큐 Tail 이동</text>
+  <text x="233" y="114" font-family="sans-serif" font-size="12" fill="#dc2626">최소 4ms 클램핑 지연</text>
+
+  <line x1="408" y1="101" x2="438" y2="101" stroke="#dc2626" stroke-width="2"/>
+  <polygon points="438,97 446,101 438,105" fill="#dc2626"/>
+
+  <rect x="451" y="76" width="145" height="50" rx="4" fill="#ffffff" stroke="#1f2937" stroke-width="1"/>
+  <text x="461" y="96" font-family="sans-serif" font-size="12" fill="#1f2937">대기 작업 뒤로 밀림</text>
+  <text x="461" y="114" font-family="sans-serif" font-size="12" fill="#1f2937">후속 연산 지연 초래</text>
+
+  <!-- Modern scheduler.yield section -->
+  <rect x="30" y="156" width="580" height="105" rx="6" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="45" y="178" font-family="sans-serif" font-size="13" font-weight="bold" fill="#16a34a">표준 사양: scheduler.yield() - 우선순위 보존 연속성(Prioritized Continuation)</text>
+  
+  <rect x="45" y="190" width="130" height="52" rx="4" fill="#ffffff" stroke="#1f2937" stroke-width="1"/>
+  <text x="55" y="211" font-family="sans-serif" font-size="12" fill="#1f2937">긴 연산 루프 분할</text>
+  <text x="55" y="229" font-family="sans-serif" font-size="12" fill="#1f2937">await yield() 호출</text>
+
+  <line x1="180" y1="216" x2="210" y2="216" stroke="#16a34a" stroke-width="2"/>
+  <polygon points="210,212 218,216 210,220" fill="#16a34a"/>
+
+  <rect x="223" y="190" width="180" height="52" rx="4" fill="#ffffff" stroke="#2563eb" stroke-width="1"/>
+  <text x="233" y="211" font-family="sans-serif" font-size="12" fill="#2563eb">브라우저 렌더링 &amp; 입력</text>
+  <text x="233" y="229" font-family="sans-serif" font-size="12" fill="#2563eb">메인 스레드 즉각 처리</text>
+
+  <line x1="408" y1="216" x2="438" y2="216" stroke="#16a34a" stroke-width="2"/>
+  <polygon points="438,212 446,216 438,220" fill="#16a34a"/>
+
+  <rect x="451" y="190" width="145" height="52" rx="4" fill="#ffffff" stroke="#16a34a" stroke-width="1"/>
+  <text x="461" y="211" font-family="sans-serif" font-size="12" fill="#16a34a">동일 우선순위 Head 복귀</text>
+  <text x="461" y="229" font-family="sans-serif" font-size="12" fill="#16a34a">지연 없는 즉각 재개</text>
+</svg>
