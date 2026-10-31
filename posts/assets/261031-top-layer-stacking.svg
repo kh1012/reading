@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 360" width="620" height="360">
+  <rect width="620" height="360" fill="#ffffff" />
+  
+  <!-- 상단: Top Layer 영역 -->
+  <rect x="30" y="25" width="560" height="135" rx="8" fill="#f8fafc" stroke="#2563eb" stroke-width="2" stroke-dasharray="6,4" />
+  <text x="45" y="50" font-family="sans-serif" font-size="14" font-weight="bold" fill="#2563eb">Top Layer (브라우저 최상위 렌더링 스택)</text>
+  <text x="45" y="68" font-family="sans-serif" font-size="12" fill="#1f2937">일반 DOM 문서 흐름 및 z-index 계층을 초월하여 뷰포트 최상단에 렌더링</text>
+  
+  <!-- Top Layer 내부 백드롭 및 팝오버 요소 -->
+  <rect x="50" y="85" width="230" height="60" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5" />
+  <text x="65" y="110" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1f2937">::backdrop 가상 요소</text>
+  <text x="65" y="130" font-family="sans-serif" font-size="12" fill="#1f2937">전체 뷰포트 배경 음영 제어</text>
+  
+  <rect x="310" y="85" width="260" height="60" rx="6" fill="#2563eb" />
+  <text x="325" y="110" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff">:popover-open (투영된 팝오버)</text>
+  <text x="325" y="130" font-family="sans-serif" font-size="12" fill="#ffffff">z-index 제약 없음 · 클리핑 우회</text>
+
+  <!-- 투영 화살표 및 안내선 -->
+  <path d="M 440 230 L 440 155" stroke="#16a34a" stroke-width="2" stroke-dasharray="4,4" fill="none" />
+  <polygon points="440,147 435,157 445,157" fill="#16a34a" />
+  <text x="450" y="195" font-family="sans-serif" font-size="12" font-weight="bold" fill="#16a34a">물리적 이동 없이 Top Layer 투영</text>
+
+  <!-- 하단: 일반 DOM 계층 영역 -->
+  <rect x="30" y="190" width="560" height="145" rx="8" fill="#f9fafb" stroke="#1f2937" stroke-width="1.5" />
+  <text x="45" y="215" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1f2937">일반 DOM 트리 (Document Flow)</text>
+  
+  <!-- 부모 컨테이너 (overflow: hidden) -->
+  <rect x="50" y="230" width="520" height="90" rx="6" fill="#ffffff" stroke="#dc2626" stroke-width="1.5" />
+  <text x="65" y="252" font-family="sans-serif" font-size="13" font-weight="bold" fill="#dc2626">부모 컨테이너 (overflow: hidden, z-index: 1, position: relative)</text>
+  
+  <!-- DOM 내부 트리거 및 팝오버 위치 -->
+  <rect x="65" y="265" width="180" height="42" rx="4" fill="#f3f4f6" stroke="#1f2937" stroke-width="1" />
+  <text x="75" y="291" font-family="sans-serif" font-size="12" fill="#1f2937">&lt;button popovertarget&gt;</text>
+  
+  <rect x="270" y="265" width="280" height="42" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5" />
+  <text x="280" y="291" font-family="sans-serif" font-size="12" font-weight="bold" fill="#16a34a">&lt;div popover&gt; (DOM 원위치 및 CSS 상속 유지)</text>
+</svg>
