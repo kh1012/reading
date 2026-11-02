@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 320" width="600" height="320">
+  <rect width="600" height="320" fill="#ffffff"/>
+  <rect x="50" y="30" width="500" height="170" fill="#ffffff" stroke="#1f2937" stroke-width="2" stroke-dasharray="6,4"/>
+  <text x="65" y="55" fill="#1f2937" font-family="sans-serif" font-size="14px" font-weight="bold">브라우저 뷰포트 (Viewport / Root Bounds)</text>
+  <rect x="150" y="115" width="300" height="170" fill="none" stroke="#dc2626" stroke-width="2"/>
+  <rect x="150" y="115" width="300" height="85" fill="#2563eb" fill-opacity="0.15" stroke="#2563eb" stroke-width="2"/>
+  <text x="165" y="145" fill="#2563eb" font-family="sans-serif" font-size="13px" font-weight="bold">교차 영역 (Intersection Rect: 50% 노출 면적)</text>
+  <text x="165" y="170" fill="#16a34a" font-family="sans-serif" font-size="12px">MRC 디스플레이 요건: 50% 교차 충족 (threshold: 0.5)</text>
+  <line x1="50" y1="200" x2="550" y2="200" stroke="#1f2937" stroke-width="2"/>
+  <text x="65" y="195" fill="#1f2937" font-family="sans-serif" font-size="12px">뷰포트 하단 경계선</text>
+  <text x="165" y="240" fill="#dc2626" font-family="sans-serif" font-size="13px">미노출 영역 (Target Bounds 외부: 50%)</text>
+  <text x="165" y="265" fill="#1f2937" font-family="sans-serif" font-size="12px">연속 1초 이상 유지 시 타이머 완료 후 노출 인정</text>
+</svg>

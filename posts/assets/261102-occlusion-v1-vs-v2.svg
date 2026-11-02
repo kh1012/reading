@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 320" width="600" height="320">
+  <rect width="600" height="320" fill="#ffffff"/>
+  <rect x="30" y="30" width="255" height="260" fill="#ffffff" stroke="#1f2937" stroke-width="1.5"/>
+  <text x="45" y="55" fill="#1f2937" font-family="sans-serif" font-size="14px" font-weight="bold">Intersection Observer v1</text>
+  <rect x="50" y="75" width="215" height="100" fill="#2563eb" fill-opacity="0.15" stroke="#2563eb" stroke-width="2"/>
+  <text x="60" y="100" fill="#2563eb" font-family="sans-serif" font-size="13px" font-weight="bold">타깃 광고 배너 (Target)</text>
+  <rect x="75" y="115" width="190" height="85" fill="#1f2937" fill-opacity="0.85" stroke="#1f2937" stroke-width="1.5"/>
+  <text x="85" y="150" fill="#ffffff" font-family="sans-serif" font-size="12px">불투명 오버레이 (차폐 요소)</text>
+  <text x="85" y="170" fill="#ffffff" font-family="sans-serif" font-size="12px">모달 · 플로팅 UI</text>
+  <text x="45" y="235" fill="#16a34a" font-family="sans-serif" font-size="13px">isIntersecting: true (단순 사각형 교차)</text>
+  <text x="45" y="260" fill="#dc2626" font-family="sans-serif" font-size="12px">결과: 실제 가려졌으나 허위 노출로 인정</text>
+  <rect x="315" y="30" width="255" height="260" fill="#ffffff" stroke="#1f2937" stroke-width="1.5"/>
+  <text x="330" y="55" fill="#1f2937" font-family="sans-serif" font-size="14px" font-weight="bold">Intersection Observer v2</text>
+  <rect x="335" y="75" width="215" height="100" fill="#2563eb" fill-opacity="0.15" stroke="#2563eb" stroke-width="2"/>
+  <text x="345" y="100" fill="#2563eb" font-family="sans-serif" font-size="13px" font-weight="bold">타깃 광고 배너 (Target)</text>
+  <rect x="360" y="115" width="190" height="85" fill="#1f2937" fill-opacity="0.85" stroke="#1f2937" stroke-width="1.5"/>
+  <text x="370" y="150" fill="#ffffff" font-family="sans-serif" font-size="12px">불투명 오버레이 (차폐 요소)</text>
+  <text x="370" y="170" fill="#ffffff" font-family="sans-serif" font-size="12px">trackVisibility: true, delay: 100</text>
+  <text x="330" y="235" fill="#dc2626" font-family="sans-serif" font-size="13px">isVisible: false (차폐 감지 성공)</text>
+  <text x="330" y="260" fill="#16a34a" font-family="sans-serif" font-size="12px">결과: 비정상 노출 방어 및 광고 사기 차단</text>
+</svg>
