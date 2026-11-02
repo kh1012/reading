@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" width="640" height="320">
+  <rect width="640" height="320" fill="#ffffff"/>
+  <text x="20" y="30" font-family="sans-serif" font-size="14px" font-weight="bold" fill="#1f2937">포인터 캡처(Pointer Capture) 메커니즘 비교</text>
+  
+  <rect x="20" y="50" width="285" height="180" rx="6" fill="#f9fafb" stroke="#1f2937" stroke-width="1.5"/>
+  <text x="35" y="75" font-family="sans-serif" font-size="13px" font-weight="bold" fill="#dc2626">1. 캡처 미적용 (기본 동작)</text>
+  
+  <rect x="40" y="95" width="120" height="60" rx="4" fill="#ffffff" stroke="#1f2937" stroke-width="1.5"/>
+  <text x="55" y="130" font-family="sans-serif" font-size="12px" fill="#1f2937">타깃 엘리먼트</text>
+  
+  <path d="M 100 125 L 220 180" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="4,4"/>
+  <circle cx="100" cy="125" r="4" fill="#1f2937"/>
+  <circle cx="220" cy="180" r="5" fill="#dc2626"/>
+  <text x="180" y="165" font-family="sans-serif" font-size="12px" fill="#dc2626">요소 경계 이탈</text>
+  <text x="35" y="205" font-family="sans-serif" font-size="12px" fill="#1f2937">결과: 이벤트 유실 및 타 요소로 전환</text>
+
+  <rect x="335" y="50" width="285" height="180" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="350" y="75" font-family="sans-serif" font-size="13px" font-weight="bold" fill="#2563eb">2. setPointerCapture(pointerId) 적용</text>
+  
+  <rect x="355" y="95" width="120" height="60" rx="4" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="370" y="130" font-family="sans-serif" font-size="12px" fill="#1f2937">캡처된 엘리먼트</text>
+  
+  <path d="M 415 125 L 540 180" fill="none" stroke="#16a34a" stroke-width="2"/>
+  <circle cx="415" cy="125" r="4" fill="#1f2937"/>
+  <circle cx="540" cy="180" r="5" fill="#16a34a"/>
+  
+  <path d="M 540 180 Q 480 210 415 160" fill="none" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <text x="480" y="165" font-family="sans-serif" font-size="12px" fill="#16a34a">좌표 창 밖 이탈</text>
+  <text x="350" y="205" font-family="sans-serif" font-size="12px" fill="#2563eb">결과: 모든 이벤트가 캡처 요소로 라우팅</text>
+
+  <rect x="20" y="245" width="600" height="60" rx="6" fill="#ffffff" stroke="#1f2937" stroke-width="1"/>
+  <text x="35" y="268" font-family="sans-serif" font-size="12px" font-weight="bold" fill="#1f2937">디바이스 조작 유형별 캡처 차이:</text>
+  <text x="35" y="290" font-family="sans-serif" font-size="12px" fill="#1f2937">- 마우스: 호버 지원으로 암시적 캡처 없음 -> element.setPointerCapture() 명시적 호출 필수</text>
+  <text x="390" y="290" font-family="sans-serif" font-size="12px" fill="#16a34a">- 터치/펜: 직접 조작 장치 -> pointerdown 시 암시적 캡처 자동 활성화</text>
+</svg>
