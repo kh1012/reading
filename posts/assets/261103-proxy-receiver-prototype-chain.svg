@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300" width="640" height="300">
+  <rect width="640" height="300" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="24" y="32" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1f2937">Reflect와 receiver 인자를 통한 프로토타입 체인 this 바인딩</text>
+  <text x="24" y="50" font-family="sans-serif" font-size="12" fill="#1f2937">상속 구조에서 getter/setter 컨텍스트 보정 메커니즘</text>
+
+  <!-- Child Box (Proxy Instance) -->
+  <rect x="24" y="80" width="230" height="180" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
+  <text x="38" y="105" font-family="sans-serif" font-size="13" font-weight="bold" fill="#2563eb">자식 객체 (child / Proxy)</text>
+  <text x="38" y="130" font-family="sans-serif" font-size="12" fill="#1f2937">• receiver = child (프록시)</text>
+  <text x="38" y="155" font-family="sans-serif" font-size="12" fill="#1f2937">• _val = 20</text>
+  <text x="38" y="185" font-family="sans-serif" font-size="12" fill="#1f2937">호출: child.val</text>
+  <rect x="34" y="205" width="205" height="40" rx="4" fill="#ffffff" stroke="#1f2937" stroke-width="1"/>
+  <text x="42" y="222" font-family="sans-serif" font-size="12" fill="#1f2937">get(target, prop, receiver) {</text>
+  <text x="42" y="238" font-family="sans-serif" font-size="12" fill="#2563eb">  Reflect.get(..., receiver);</text>
+
+  <!-- Prototype Arrow -->
+  <line x1="254" y1="140" x2="350" y2="140" stroke="#1f2937" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <polygon points="350,136 358,140 350,144" fill="#1f2937"/>
+  <text x="262" y="130" font-family="sans-serif" font-size="12" fill="#1f2937">[[Prototype]]</text>
+
+  <!-- Parent Box (Prototype Object) -->
+  <rect x="360" y="80" width="256" height="180" rx="6" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="374" y="105" font-family="sans-serif" font-size="13" font-weight="bold" fill="#16a34a">부모 객체 (parent / Prototype)</text>
+  <text x="374" y="130" font-family="sans-serif" font-size="12" fill="#1f2937">• _val = 10</text>
+  <text x="374" y="155" font-family="sans-serif" font-size="12" fill="#1f2937">• get val() { return this._val; }</text>
+
+  <!-- Difference Comparison Box inside Parent -->
+  <rect x="370" y="175" width="236" height="70" rx="4" fill="#ffffff" stroke="#1f2937" stroke-width="1"/>
+  <text x="378" y="195" font-family="sans-serif" font-size="12" fill="#dc2626">• receiver 미전달: this = parent (_val: 10)</text>
+  <text x="378" y="215" font-family="sans-serif" font-size="12" fill="#16a34a">• receiver 전달: this = child (_val: 20)</text>
+  <text x="378" y="233" font-family="sans-serif" font-size="12" fill="#2563eb">올바른 의존성 추적 및 상태 바인딩 달성</text>
+
+  <!-- Bottom Notice -->
+  <text x="24" y="282" font-family="sans-serif" font-size="12" fill="#1f2937">receiver 매개변수는 프로토타입 상속 체인을 거쳐 접근자 메서드가 실행될 때 올바른 this를 유지합니다.</text>
+</svg>
