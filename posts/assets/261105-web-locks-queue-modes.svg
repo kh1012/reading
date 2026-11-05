@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 260" width="640" height="260">
+  <rect width="640" height="260" fill="#ffffff"/>
+
+  <rect x="20" y="15" width="600" height="36" rx="6" fill="#f8fafc" stroke="#1f2937" stroke-width="1.5"/>
+  <text x="35" y="38" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1f2937">리소스 식별자: auth_token_refresh</text>
+  <text x="590" y="38" font-family="sans-serif" font-size="12" fill="#2563eb" text-anchor="end">W3C 선입선출 (FIFO) 큐 스펙</text>
+
+  <rect x="20" y="65" width="220" height="175" rx="6" fill="#ffffff" stroke="#dc2626" stroke-width="1.5"/>
+  <rect x="20" y="65" width="220" height="30" rx="6" fill="#fee2e2"/>
+  <text x="130" y="86" font-family="sans-serif" font-size="13" font-weight="bold" fill="#dc2626" text-anchor="middle">현재 보유 중 (Held Lock)</text>
+  
+  <text x="35" y="118" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937">클라이언트: Tab A</text>
+  <text x="35" y="138" font-family="sans-serif" font-size="12" fill="#1f2937">clientId: e1a2... (UUID)</text>
+  <text x="35" y="160" font-family="sans-serif" font-size="12" font-weight="bold" fill="#dc2626">모드: exclusive (배타적)</text>
+  <text x="35" y="182" font-family="sans-serif" font-size="11" fill="#1f2937">단일 컨텍스트만 배타 접근</text>
+  <text x="35" y="202" font-family="sans-serif" font-size="11" fill="#16a34a">Promise 완료 시 자동 해제</text>
+  <text x="35" y="222" font-family="sans-serif" font-size="11" fill="#dc2626">비정상 종료 시 원자적 회수</text>
+
+  <line x1="260" y1="152" x2="245" y2="152" stroke="#1f2937" stroke-width="2"/>
+  <polyline points="252,146 244,152 252,158" fill="none" stroke="#1f2937" stroke-width="2"/>
+
+  <rect x="260" y="65" width="360" height="175" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+  <rect x="260" y="65" width="360" height="30" rx="6" fill="#dbeafe"/>
+  <text x="440" y="86" font-family="sans-serif" font-size="13" font-weight="bold" fill="#2563eb" text-anchor="middle">대기열 (Pending FIFO Requests)</text>
+
+  <rect x="275" y="108" width="100" height="118" rx="4" fill="#f8fafc" stroke="#1f2937" stroke-width="1"/>
+  <text x="325" y="130" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937" text-anchor="middle">1순위 대기</text>
+  <text x="325" y="152" font-family="sans-serif" font-size="11" fill="#1f2937" text-anchor="middle">Tab B</text>
+  <text x="325" y="174" font-family="sans-serif" font-size="11" fill="#dc2626" text-anchor="middle">exclusive</text>
+  <text x="325" y="200" font-family="sans-serif" font-size="10" fill="#2563eb" text-anchor="middle">차례 대기 중</text>
+
+  <rect x="390" y="108" width="100" height="118" rx="4" fill="#f8fafc" stroke="#1f2937" stroke-width="1"/>
+  <text x="440" y="130" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937" text-anchor="middle">2순위 대기</text>
+  <text x="440" y="152" font-family="sans-serif" font-size="11" fill="#1f2937" text-anchor="middle">Worker 1</text>
+  <text x="440" y="174" font-family="sans-serif" font-size="11" fill="#16a34a" text-anchor="middle">shared</text>
+  <text x="440" y="200" font-family="sans-serif" font-size="10" fill="#2563eb" text-anchor="middle">동시 읽기 대기</text>
+
+  <rect x="505" y="108" width="100" height="118" rx="4" fill="#f8fafc" stroke="#1f2937" stroke-width="1"/>
+  <text x="555" y="130" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937" text-anchor="middle">3순위 대기</text>
+  <text x="555" y="152" font-family="sans-serif" font-size="11" fill="#1f2937" text-anchor="middle">Worker 2</text>
+  <text x="555" y="174" font-family="sans-serif" font-size="11" fill="#16a34a" text-anchor="middle">shared</text>
+  <text x="555" y="200" font-family="sans-serif" font-size="10" fill="#2563eb" text-anchor="middle">기아 방지 FIFO</text>
+</svg>
