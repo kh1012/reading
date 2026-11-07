@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 200" width="620" height="200">
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <defs>
+    <marker id="arrow-sec" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#1f2937"/>
+    </marker>
+  </defs>
+
+  <!-- Step 1: Secure Context -->
+  <rect x="15" y="30" width="125" height="140" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="25" y="58" font-family="sans-serif" font-size="13" font-weight="bold" fill="#2563eb">1. 보안 컨텍스트</text>
+  <text x="25" y="84" font-family="sans-serif" font-size="12" fill="#1f2937">HTTPS 환경 또는</text>
+  <text x="25" y="104" font-family="sans-serif" font-size="12" fill="#1f2937">localhost 검증</text>
+  <rect x="25" y="122" width="105" height="34" rx="4" fill="#fef2f2" stroke="#dc2626" stroke-width="1"/>
+  <text x="32" y="142" font-family="sans-serif" font-size="11" font-weight="bold" fill="#dc2626">HTTP 완전 차단</text>
+
+  <!-- Arrow 1 to 2 -->
+  <path d="M 140 100 L 165 100" stroke="#1f2937" stroke-width="2" marker-end="url(#arrow-sec)"/>
+
+  <!-- Step 2: User Activation -->
+  <rect x="165" y="30" width="125" height="140" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="175" y="58" font-family="sans-serif" font-size="13" font-weight="bold" fill="#2563eb">2. 사용자 활성화</text>
+  <text x="175" y="84" font-family="sans-serif" font-size="12" fill="#1f2937">클릭/입력 제스처</text>
+  <text x="175" y="104" font-family="sans-serif" font-size="12" fill="#1f2937">Transient State</text>
+  <rect x="175" y="122" width="105" height="34" rx="4" fill="#fef2f2" stroke="#dc2626" stroke-width="1"/>
+  <text x="180" y="142" font-family="sans-serif" font-size="11" font-weight="bold" fill="#dc2626">타이머 만료 감시</text>
+
+  <!-- Arrow 2 to 3 -->
+  <path d="M 290 100 L 315 100" stroke="#1f2937" stroke-width="2" marker-end="url(#arrow-sec)"/>
+
+  <!-- Step 3: Focus Check -->
+  <rect x="315" y="30" width="125" height="140" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="325" y="58" font-family="sans-serif" font-size="13" font-weight="bold" fill="#2563eb">3. 문서 포커스</text>
+  <text x="325" y="84" font-family="sans-serif" font-size="12" fill="#1f2937">현재 창 활성화</text>
+  <text x="325" y="104" font-family="sans-serif" font-size="12" fill="#1f2937">document.hasFocus</text>
+  <rect x="325" y="122" width="105" height="34" rx="4" fill="#fef2f2" stroke="#dc2626" stroke-width="1"/>
+  <text x="330" y="142" font-family="sans-serif" font-size="11" font-weight="bold" fill="#dc2626">백그라운드 차단</text>
+
+  <!-- Arrow 3 to 4 -->
+  <path d="M 440 100 L 465 100" stroke="#1f2937" stroke-width="2" marker-end="url(#arrow-sec)"/>
+
+  <!-- Step 4: Permission & Sanitization -->
+  <rect x="465" y="30" width="140" height="140" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="475" y="58" font-family="sans-serif" font-size="13" font-weight="bold" fill="#16a34a">4. 권한 및 살균</text>
+  <text x="475" y="84" font-family="sans-serif" font-size="12" fill="#1f2937">Permissions API</text>
+  <text x="475" y="104" font-family="sans-serif" font-size="12" fill="#1f2937">clipboard-read 승인</text>
+  <rect x="475" y="122" width="120" height="34" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1"/>
+  <text x="482" y="142" font-family="sans-serif" font-size="11" font-weight="bold" fill="#16a34a">안전한 I/O 실행</text>
+</svg>

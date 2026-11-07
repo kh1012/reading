@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 320" width="620" height="320">
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a"/>
+    </marker>
+  </defs>
+
+  <!-- Web Application Context -->
+  <rect x="20" y="25" width="255" height="270" rx="8" fill="#f8fafc" stroke="#2563eb" stroke-width="2"/>
+  <text x="35" y="52" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1f2937">웹 애플리케이션 (Web Context)</text>
+
+  <!-- ClipboardItem Container -->
+  <rect x="35" y="70" width="225" height="210" rx="6" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="45" y="94" font-family="sans-serif" font-size="13" font-weight="bold" fill="#2563eb">ClipboardItem 캡슐화</text>
+
+  <rect x="45" y="108" width="205" height="42" rx="4" fill="#eff6ff" stroke="#2563eb" stroke-width="1"/>
+  <text x="55" y="126" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937">MIME: text/plain</text>
+  <text x="55" y="142" font-family="sans-serif" font-size="11" fill="#4b5563">Blob / 순수 텍스트</text>
+
+  <rect x="45" y="158" width="205" height="42" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1"/>
+  <text x="55" y="176" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937">MIME: text/html</text>
+  <text x="55" y="192" font-family="sans-serif" font-size="11" fill="#4b5563">Blob / 서식 마크업 (살균 대상)</text>
+
+  <rect x="45" y="208" width="205" height="60" rx="4" fill="#fef2f2" stroke="#dc2626" stroke-width="1"/>
+  <text x="55" y="226" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937">MIME: image/png</text>
+  <text x="55" y="242" font-family="sans-serif" font-size="11" fill="#4b5563">Promise&lt;Blob&gt; 지연 평가</text>
+  <text x="55" y="258" font-family="sans-serif" font-size="11" fill="#dc2626">(WebKit 표준 지연 패턴)</text>
+
+  <!-- Interactive Arrows -->
+  <path d="M 285 130 L 335 130" stroke="#2563eb" stroke-width="2.5" marker-end="url(#arrow-blue)"/>
+  <text x="286" y="120" font-family="sans-serif" font-size="12" font-weight="bold" fill="#2563eb">write()</text>
+
+  <path d="M 335 185 L 285 185" stroke="#16a34a" stroke-width="2.5" marker-end="url(#arrow-green)"/>
+  <text x="288" y="205" font-family="sans-serif" font-size="12" font-weight="bold" fill="#16a34a">read()</text>
+
+  <!-- OS System Clipboard -->
+  <rect x="345" y="25" width="255" height="270" rx="8" fill="#f8fafc" stroke="#1f2937" stroke-width="2"/>
+  <text x="360" y="52" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1f2937">OS 시스템 클립보드</text>
+
+  <rect x="360" y="70" width="225" height="210" rx="6" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="370" y="94" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1f2937">다중 포맷 레지스트리</text>
+
+  <rect x="370" y="108" width="205" height="42" rx="4" fill="#eff6ff" stroke="#2563eb" stroke-width="1"/>
+  <text x="380" y="126" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937">CF_TEXT / UTF8_STRING</text>
+  <text x="380" y="142" font-family="sans-serif" font-size="11" fill="#4b5563">터미널, 일반 에디터 수신</text>
+
+  <rect x="370" y="158" width="205" height="42" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1"/>
+  <text x="380" y="176" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937">HTML Format</text>
+  <text x="380" y="192" font-family="sans-serif" font-size="11" fill="#4b5563">워드프로세서, 웹 에디터 수신</text>
+
+  <rect x="370" y="208" width="205" height="60" rx="4" fill="#fef2f2" stroke="#dc2626" stroke-width="1"/>
+  <text x="380" y="226" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937">PNG / Web Custom Format</text>
+  <text x="380" y="242" font-family="sans-serif" font-size="11" fill="#4b5563">web 접두사 커스텀 포맷</text>
+  <text x="380" y="258" font-family="sans-serif" font-size="11" fill="#1f2937">(Figma, 네이티브 앱 데이터)</text>
+</svg>
