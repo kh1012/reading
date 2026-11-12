@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 330" width="640" height="330">
+  <rect width="640" height="330" fill="#ffffff" />
+  <text x="320" y="28" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1f2937" text-anchor="middle">원격 전송 사양 비교: 구형 HTTP with SSE vs Streamable HTTP</text>
+  
+  <rect x="25" y="48" width="280" height="240" rx="6" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5" />
+  <text x="165" y="74" font-family="sans-serif" font-size="13" font-weight="bold" fill="#dc2626" text-anchor="middle">구형 HTTP with SSE (Deprecated)</text>
+  
+  <rect x="40" y="92" width="250" height="48" rx="4" fill="#ffffff" stroke="#dc2626" stroke-width="1" />
+  <text x="50" y="112" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937">1. GET /sse (EventSource 스트림)</text>
+  <text x="50" y="130" font-family="sans-serif" font-size="12" fill="#dc2626">헤더 미지원 -> 토큰이 URL 쿼리에 노출</text>
+  
+  <rect x="40" y="150" width="250" height="48" rx="4" fill="#ffffff" stroke="#dc2626" stroke-width="1" />
+  <text x="50" y="170" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937">2. POST /messages?sessionId=...</text>
+  <text x="50" y="188" font-family="sans-serif" font-size="12" fill="#dc2626">이원화 엔드포인트 간 세션 불일치 위험</text>
+  
+  <text x="40" y="232" font-family="sans-serif" font-size="12" font-weight="bold" fill="#dc2626">• 단점: 보안 결함 및 세션 동기화 실패</text>
+  <text x="40" y="256" font-family="sans-serif" font-size="12" fill="#1f2937">• 2025년 3월 사양 개정으로 공식 폐기됨</text>
+  
+  <rect x="335" y="48" width="280" height="240" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5" />
+  <text x="475" y="74" font-family="sans-serif" font-size="13" font-weight="bold" fill="#16a34a" text-anchor="middle">Streamable HTTP (공식 원격 표준)</text>
+  
+  <rect x="350" y="92" width="250" height="110" rx="4" fill="#ffffff" stroke="#16a34a" stroke-width="1" />
+  <text x="360" y="112" font-family="sans-serif" font-size="12" font-weight="bold" fill="#16a34a">단일 엔드포인트: POST /mcp</text>
+  <text x="360" y="132" font-family="sans-serif" font-size="12" fill="#1f2937">• 헤더: Authorization: Bearer &lt;token&gt;</text>
+  <text x="360" y="152" font-family="sans-serif" font-size="12" fill="#1f2937">• 헤더: Mcp-Session-Id (세션 추적)</text>
+  <text x="360" y="172" font-family="sans-serif" font-size="12" fill="#1f2937">• 응답: JSON 또는 SSE 스트림 전환</text>
+  <text x="360" y="192" font-family="sans-serif" font-size="12" fill="#1f2937">• 복구: GET /mcp (Last-Event-ID)</text>
+  
+  <text x="350" y="232" font-family="sans-serif" font-size="12" font-weight="bold" fill="#16a34a">• 장점: 단일 URL 관리, 표준 인증 지원</text>
+  <text x="350" y="256" font-family="sans-serif" font-size="12" fill="#1f2937">• 2025-03-26 개정 사양 공식 표준 확정</text>
+  
+  <text x="320" y="312" font-family="sans-serif" font-size="12" fill="#1f2937" text-anchor="middle">단일 엔드포인트와 표준 헤더 기반으로 보안성과 인프라 호환성을 완벽히 확보함</text>
+</svg>
