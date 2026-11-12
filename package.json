@@ -1,0 +1,7 @@
+{
+  "name": "reading",
+  "private": true,
+  "type": "module",
+  "scripts": { "build": "node scripts/build.mjs" },
+  "dependencies": { "marked": "^18.2.0" }
+}
