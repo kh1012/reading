@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 240" width="100%" height="240">
+  <rect width="600" height="240" fill="#ffffff"/>
+  <text x="300" y="25" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1f2937" text-anchor="middle">스냅샷 캡처 및 렌더링 억제 파이프라인</text>
+  
+  <rect x="30" y="55" width="140" height="130" rx="8" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="100" y="80" font-family="sans-serif" font-size="13" font-weight="bold" fill="#dc2626" text-anchor="middle">이전 DOM 상태</text>
+  <rect x="45" y="95" width="110" height="40" rx="4" fill="#ffffff" stroke="#dc2626" stroke-width="1"/>
+  <text x="100" y="120" font-family="sans-serif" font-size="12" fill="#dc2626" text-anchor="middle">비트맵 스냅샷</text>
+  <text x="100" y="160" font-family="sans-serif" font-size="11" fill="#1f2937" text-anchor="middle">구 상태 기하정보 캡처</text>
+  
+  <line x1="170" y1="120" x2="210" y2="120" stroke="#1f2937" stroke-width="2"/>
+  <polygon points="210,116 218,120 210,124" fill="#1f2937"/>
+  
+  <rect x="220" y="55" width="160" height="130" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="300" y="80" font-family="sans-serif" font-size="13" font-weight="bold" fill="#2563eb" text-anchor="middle">렌더링 억제 구간</text>
+  <text x="300" y="105" font-family="sans-serif" font-size="12" fill="#1f2937" text-anchor="middle">페인트 일시 정지</text>
+  <rect x="235" y="120" width="130" height="30" rx="4" fill="#ffffff" stroke="#2563eb" stroke-width="1"/>
+  <text x="300" y="140" font-family="sans-serif" font-size="12" font-weight="bold" fill="#2563eb" text-anchor="middle">DOM 업데이트 콜백</text>
+  <text x="300" y="170" font-family="sans-serif" font-size="11" fill="#1f2937" text-anchor="middle">포인터 히트 루트 제한</text>
+  
+  <line x1="380" y1="120" x2="420" y2="120" stroke="#1f2937" stroke-width="2"/>
+  <polygon points="420,116 428,120 420,124" fill="#1f2937"/>
+  
+  <rect x="430" y="55" width="140" height="130" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="500" y="80" font-family="sans-serif" font-size="13" font-weight="bold" fill="#16a34a" text-anchor="middle">신규 DOM 상태</text>
+  <rect x="445" y="95" width="110" height="40" rx="4" fill="#ffffff" stroke="#16a34a" stroke-width="1"/>
+  <text x="500" y="120" font-family="sans-serif" font-size="12" fill="#16a34a" text-anchor="middle">새 스냅샷 생성</text>
+  <text x="500" y="160" font-family="sans-serif" font-size="11" fill="#1f2937" text-anchor="middle">하드웨어 가속 보간</text>
+  
+  <text x="300" y="215" font-family="sans-serif" font-size="12" fill="#1f2937" text-anchor="middle">의사 요소 트리에서 구 스냅샷과 신 뷰의 크로스페이드 및 형태 변형 자동 처리</text>
+</svg>
