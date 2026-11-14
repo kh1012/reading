@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 280" width="640" height="280">
+  <rect width="640" height="280" fill="#ffffff"/>
+  <rect x="20" y="25" width="170" height="230" rx="6" fill="#f8fafc" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="105" y="48" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1f2937" text-anchor="middle">ReadableStream</text>
+  <rect x="35" y="65" width="140" height="42" rx="4" fill="#ffffff" stroke="#1f2937" stroke-width="1"/>
+  <text x="105" y="90" font-family="sans-serif" font-size="12" fill="#1f2937" text-anchor="middle">Underlying Source</text>
+  <rect x="35" y="122" width="140" height="42" rx="4" fill="#ffffff" stroke="#1f2937" stroke-width="1"/>
+  <text x="105" y="147" font-family="sans-serif" font-size="12" fill="#1f2937" text-anchor="middle">Internal Queue</text>
+  <rect x="35" y="180" width="140" height="42" rx="4" fill="#ffffff" stroke="#2563eb" stroke-width="1"/>
+  <text x="105" y="205" font-family="sans-serif" font-size="12" fill="#2563eb" text-anchor="middle">Reader (Locking)</text>
+
+  <rect x="235" y="25" width="170" height="230" rx="6" fill="#f8fafc" stroke="#1f2937" stroke-width="1.5"/>
+  <text x="320" y="48" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1f2937" text-anchor="middle">TransformStream</text>
+  <rect x="250" y="65" width="140" height="42" rx="4" fill="#ffffff" stroke="#1f2937" stroke-width="1"/>
+  <text x="320" y="90" font-family="sans-serif" font-size="12" fill="#1f2937" text-anchor="middle">Writable Side</text>
+  <rect x="250" y="122" width="140" height="42" rx="4" fill="#ffffff" stroke="#16a34a" stroke-width="1"/>
+  <text x="320" y="147" font-family="sans-serif" font-size="12" fill="#16a34a" text-anchor="middle">transform(chunk)</text>
+  <rect x="250" y="180" width="140" height="42" rx="4" fill="#ffffff" stroke="#1f2937" stroke-width="1"/>
+  <text x="320" y="205" font-family="sans-serif" font-size="12" fill="#1f2937" text-anchor="middle">Readable Side</text>
+
+  <rect x="450" y="25" width="170" height="230" rx="6" fill="#f8fafc" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="535" y="48" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1f2937" text-anchor="middle">WritableStream</text>
+  <rect x="465" y="65" width="140" height="42" rx="4" fill="#ffffff" stroke="#16a34a" stroke-width="1"/>
+  <text x="535" y="90" font-family="sans-serif" font-size="12" fill="#16a34a" text-anchor="middle">Writer (Locking)</text>
+  <rect x="465" y="122" width="140" height="42" rx="4" fill="#ffffff" stroke="#1f2937" stroke-width="1"/>
+  <text x="535" y="147" font-family="sans-serif" font-size="12" fill="#1f2937" text-anchor="middle">Internal Queue</text>
+  <rect x="465" y="180" width="140" height="42" rx="4" fill="#ffffff" stroke="#1f2937" stroke-width="1"/>
+  <text x="535" y="205" font-family="sans-serif" font-size="12" fill="#1f2937" text-anchor="middle">Underlying Sink</text>
+
+  <path d="M 190 143 L 233 143" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <text x="212" y="133" font-family="sans-serif" font-size="11" fill="#2563eb" text-anchor="middle">pipeThrough</text>
+  <path d="M 405 143 L 448 143" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/>
+  <text x="427" y="133" font-family="sans-serif" font-size="11" fill="#2563eb" text-anchor="middle">pipeTo</text>
+
+  <path d="M 233 160 L 192 160" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <path d="M 448 160 L 407 160" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <text x="320" y="247" font-family="sans-serif" font-size="11" fill="#dc2626" text-anchor="middle">Backpressure (desiredSize &lt;= 0) 역방향 신호 전파</text>
+
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#2563eb"/>
+    </marker>
+  </defs>
+</svg>
