@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 240" width="640" height="240">
+  <rect width="640" height="240" fill="#ffffff"/>
+  
+  <!-- Step 1: Underlying Source -->
+  <rect x="15" y="60" width="110" height="110" rx="8" fill="#ffffff" stroke="#1f2937" stroke-width="2"/>
+  <text x="70" y="95" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1f2937" text-anchor="middle">Underlying</text>
+  <text x="70" y="115" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1f2937" text-anchor="middle">Source</text>
+  <text x="70" y="145" font-family="sans-serif" font-size="12" fill="#1f2937" text-anchor="middle">네트워크 / 파일</text>
+
+  <!-- Arrow 1 -->
+  <path d="M 125 115 L 155 115" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- Step 2: ReadableStream -->
+  <rect x="160" y="45" width="130" height="140" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
+  <text x="225" y="75" font-family="sans-serif" font-size="13" font-weight="bold" fill="#2563eb" text-anchor="middle">ReadableStream</text>
+  <text x="225" y="105" font-family="sans-serif" font-size="12" fill="#1f2937" text-anchor="middle">[[queue]] 버퍼</text>
+  <text x="225" y="130" font-family="sans-serif" font-size="12" fill="#1f2937" text-anchor="middle">desiredSize 평가</text>
+  <text x="225" y="155" font-family="sans-serif" font-size="12" fill="#1f2937" text-anchor="middle">Controller (enqueue)</text>
+
+  <!-- Arrow 2 -->
+  <path d="M 290 115 L 320 115" stroke="#16a34a" stroke-width="2"/>
+  <text x="305" y="105" font-family="sans-serif" font-size="12" fill="#16a34a" text-anchor="middle">Chunk</text>
+
+  <!-- Step 3: TransformStream -->
+  <rect x="325" y="45" width="135" height="140" rx="8" fill="#ffffff" stroke="#16a34a" stroke-width="2"/>
+  <text x="392" y="75" font-family="sans-serif" font-size="13" font-weight="bold" fill="#16a34a" text-anchor="middle">TransformStream</text>
+  <text x="392" y="105" font-family="sans-serif" font-size="12" fill="#1f2937" text-anchor="middle">writable (입력)</text>
+  <text x="392" y="130" font-family="sans-serif" font-size="12" fill="#1f2937" text-anchor="middle">transform() 변환</text>
+  <text x="392" y="155" font-family="sans-serif" font-size="12" fill="#1f2937" text-anchor="middle">readable (출력)</text>
+
+  <!-- Arrow 3 -->
+  <path d="M 460 115 L 490 115" stroke="#dc2626" stroke-width="2"/>
+  <text x="475" y="105" font-family="sans-serif" font-size="12" fill="#dc2626" text-anchor="middle">Chunk</text>
+
+  <!-- Step 4: WritableStream -->
+  <rect x="495" y="45" width="130" height="140" rx="8" fill="#ffffff" stroke="#dc2626" stroke-width="2"/>
+  <text x="560" y="75" font-family="sans-serif" font-size="13" font-weight="bold" fill="#dc2626" text-anchor="middle">WritableStream</text>
+  <text x="560" y="105" font-family="sans-serif" font-size="12" fill="#1f2937" text-anchor="middle">Writer (독점 락)</text>
+  <text x="560" y="130" font-family="sans-serif" font-size="12" fill="#1f2937" text-anchor="middle">Controller (write)</text>
+  <text x="560" y="155" font-family="sans-serif" font-size="12" fill="#1f2937" text-anchor="middle">Underlying Sink</text>
+
+  <!-- Markers -->
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#2563eb"/>
+    </marker>
+  </defs>
+</svg>
