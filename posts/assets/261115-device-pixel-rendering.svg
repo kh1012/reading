@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" width="100%" height="300">
+  <rect width="600" height="300" fill="#ffffff" />
+  
+  <rect x="30" y="30" width="250" height="230" fill="none" stroke="#dc2626" stroke-width="1.5" rx="4" />
+  <text x="45" y="55" font-family="sans-serif" font-size="13px" font-weight="bold" fill="#dc2626">일반 CSS 픽셀 (소수점 발생)</text>
+  <rect x="50" y="75" width="210" height="110" fill="#fef2f2" stroke="#dc2626" stroke-width="1" stroke-dasharray="3,3" />
+  <text x="60" y="110" font-family="sans-serif" font-size="12px" fill="#1f2937">CSS 크기: 150.33px × 80.67px</text>
+  <text x="60" y="135" font-family="sans-serif" font-size="12px" fill="#dc2626">서브픽셀 반올림 왜곡 발생</text>
+  <text x="60" y="160" font-family="sans-serif" font-size="12px" fill="#1f2937">Canvas 버퍼 블러 및 깜빡임 유발</text>
+  <text x="45" y="215" font-family="sans-serif" font-size="12px" fill="#1f2937">contentBoxSize × devicePixelRatio</text>
+  <text x="45" y="235" font-family="sans-serif" font-size="12px" fill="#dc2626">Safari 폴백 시 Math.round 필요</text>
+  
+  <rect x="320" y="30" width="250" height="230" fill="none" stroke="#16a34a" stroke-width="1.5" rx="4" />
+  <text x="335" y="55" font-family="sans-serif" font-size="13px" font-weight="bold" fill="#16a34a">devicePixelContentBoxSize</text>
+  <rect x="340" y="75" width="210" height="110" fill="#f0fdf4" stroke="#16a34a" stroke-width="1" />
+  <text x="350" y="110" font-family="sans-serif" font-size="12px" fill="#1f2937">물리 픽셀: 301px × 161px (정수)</text>
+  <text x="350" y="135" font-family="sans-serif" font-size="12px" fill="#16a34a">디바이스 화면 픽셀과 1:1 일치</text>
+  <text x="350" y="160" font-family="sans-serif" font-size="12px" fill="#1f2937">픽셀 퍼펙트 고해상도 렌더링</text>
+  <text x="335" y="215" font-family="sans-serif" font-size="12px" fill="#2563eb">Chrome 84+, Firefox 108+ 지원</text>
+  <text x="335" y="235" font-family="sans-serif" font-size="12px" fill="#1f2937">Safari: WebKit Bug 219005 계류</text>
+</svg>
