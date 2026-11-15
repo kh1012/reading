@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 220" width="620" height="220">
+  <rect width="620" height="220" fill="#ffffff"/>
+  <text x="20" y="30" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1f2937">단일 렌더링 프레임(16.67ms) 내 유휴 기간(Idle Period) 구조</text>
+  <rect x="20" y="50" width="580" height="110" rx="6" fill="#ffffff" stroke="#1f2937" stroke-width="1.5" stroke-dasharray="4 4"/>
+  <text x="30" y="70" font-family="sans-serif" font-size="12" fill="#1f2937">렌더링 파이프라인 주기 (60Hz V-Sync 기준 16.67ms)</text>
+  <rect x="30" y="85" width="90" height="60" rx="4" fill="#1f2937"/>
+  <text x="75" y="112" font-family="sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">입력 이벤트</text>
+  <text x="75" y="128" font-family="sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">매크로태스크</text>
+  <rect x="130" y="85" width="85" height="60" rx="4" fill="#2563eb"/>
+  <text x="172" y="112" font-family="sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">rAF 콜백</text>
+  <text x="172" y="128" font-family="sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">애니메이션</text>
+  <rect x="225" y="85" width="95" height="60" rx="4" fill="#2563eb"/>
+  <text x="272" y="112" font-family="sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">스타일 재계산</text>
+  <text x="272" y="128" font-family="sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">및 레이아웃</text>
+  <rect x="330" y="85" width="75" height="60" rx="4" fill="#2563eb"/>
+  <text x="367" y="112" font-family="sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">페인트 및</text>
+  <text x="367" y="128" font-family="sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">레이어합성</text>
+  <rect x="415" y="85" width="175" height="60" rx="4" fill="#16a34a"/>
+  <text x="502" y="112" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">유휴 기간 (Idle Period)</text>
+  <text x="502" y="128" font-family="sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">timeRemaining() 잔여 시간</text>
+  <line x1="600" y1="45" x2="600" y2="165" stroke="#dc2626" stroke-width="2"/>
+  <text x="595" y="182" font-family="sans-serif" font-size="12" fill="#dc2626" text-anchor="end">다음 V-Sync 시점</text>
+  <rect x="20" y="195" width="10" height="10" rx="2" fill="#16a34a"/>
+  <text x="36" y="205" font-family="sans-serif" font-size="12" fill="#1f2937">유휴 기간은 렌더링 갱신(Update the rendering)이 완료된 후 V-Sync 전까지 남은 여유 시간이다.</text>
+</svg>
