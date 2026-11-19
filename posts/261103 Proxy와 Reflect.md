@@ -24,24 +24,25 @@ Proxy와 Reflect를 구성하는 핵심 개념과 내부 구조는 다음과 같
 ## 3. 동작 원리
 객체 연산이 프록시를 통과하여 평가되고 핸들러 및 타겟 객체로 디스패치되는 흐름은 다음과 같다.
 
-```mermaid
-sequenceDiagram
-  autonumber
-  actor Caller as 호출자
-  participant Proxy as 프록시
-  participant Handler as 핸들러
-  participant Target as 원본 타겟
-  Caller->>Proxy: 프로퍼티 연산 실행
-  Proxy->>Handler: 해당 MOP 트랩 존재 확인
-  alt 트랩 정의됨
-    Handler->>Target: Reflect 메서드로 연산 위임
-    Target-->>Handler: 기본 연산 결과 반환
-    Handler-->>Proxy: 불변조건 검증 후 결과 전달
-  else 트랩 미정의
-    Proxy->>Target: 타겟 기본 내부 메서드로 직접 포워딩
-    Target-->>Proxy: 기본 동작 결과 반환
-  end
-  Proxy-->>Caller: 최종 연산 결과 반환
+```diagram
+종류: 시퀀스
+번호: 켬
+
+[호출자]
+[프록시]
+[핸들러]
+[원본 타겟]
+
+호출자 -> 프록시 : 프로퍼티 연산 실행
+프록시 -> 핸들러 : 해당 MOP 트랩 존재 확인
+== 트랩 정의됨 ==
+핸들러 -> 원본 타겟 : Reflect 메서드로 연산 위임
+원본 타겟 --> 핸들러 : 기본 연산 결과 반환
+핸들러 --> 프록시 : 불변조건 검증 후 결과 전달
+== 트랩 미정의 ==
+프록시 -> 원본 타겟 : 타겟 기본 내부 메서드로 직접 포워딩
+원본 타겟 --> 프록시 : 기본 동작 결과 반환
+프록시 --> 호출자 : 최종 연산 결과 반환
 ```
 
 호출자가 객체에 연산(예: 프로퍼티 조회 `obj.x`)을 가하면 자바스크립트 엔진은 동기적으로 프록시의 내부 슬롯 `[[ProxyHandler]]`를 조회한다 [3]. 핸들러에 해당 연산에 대응하는 트랩(`get`)이 존재하면 해당 트랩 함수를 즉시 호출한다 [1][3]. 핸들러에 트랩이 정의되어 있지 않은 경우, 엔진은 `[[ProxyTarget]]`에 등록된 원본 객체의 기본 내부 메서드를 호출하여 작업을 그대로 포워딩한다 [1][3].
