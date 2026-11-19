@@ -23,20 +23,22 @@ EventTarget 인터페이스를 구성하는 핵심 용어와 구조적 사양은
 ## 3. 동작 원리
 EventTarget의 이벤트 처리는 등록(Registration), 제거(Removal), 디스패치(Dispatching)의 3단계로 동작하며 WHATWG DOM 스펙의 정밀한 규칙에 따라 제어된다 [1].
 
-```mermaid
-sequenceDiagram
-    participant Caller as 호출자
-    participant Target as EventTarget
-    participant L1 as 리스너1
-    participant L2 as 리스너2
-    Caller->>Target: dispatchEvent(event)
-    Target->>Target: dispatch flag 검증
-    Target->>L1: 동기 호출
-    L1-->>Target: 실행 완료 (또는 예외 발생)
-    Target->>Target: inner invoke 예외 전역 보고
-    Target->>L2: 등록 순서대로 동기 호출
-    L2-->>Target: 실행 완료
-    Target-->>Caller: true 또는 false 반환
+```diagram
+종류: 시퀀스
+
+[호출자]
+[EventTarget]
+[리스너1]
+[리스너2]
+
+호출자 -> EventTarget : dispatchEvent(event)
+EventTarget -> EventTarget : dispatch flag 검증
+EventTarget -> 리스너1 : 동기 호출
+리스너1 --> EventTarget : 실행 완료(또는 예외 발생)
+EventTarget -> EventTarget : inner invoke 예외 전역 보고
+EventTarget -> 리스너2 : 등록 순서대로 동기 호출
+리스너2 --> EventTarget : 실행 완료
+EventTarget --> 호출자 : true 또는 false 반환
 ```
 
 ### 1) 리스너 등록 및 중복 제거 규칙
