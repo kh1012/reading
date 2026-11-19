@@ -27,27 +27,28 @@ Popover API는 이러한 구조적 한계를 브라우저 엔진 수준에서 �
 ## 3. 동작 원리
 Popover API의 수명주기는 브라우저 렌더링 엔진, Document의 `CloseWatcher` 스택, 그리고 `ToggleEvent` 인터페이스 간의 상호작용으로 제어된다 [1]. 팝오버의 상태가 닫힘에서 열림, 또는 열림에서 닫힘으로 전이될 때 엔진은 `beforetoggle` 및 `toggle` 이벤트를 순차적으로 발화한다 [1].
 
-```mermaid
-sequenceDiagram
-participant User as 사용자
-participant Trigger as 트리거 버튼
-participant Engine as 브라우저 엔진
-participant Popover as 팝오버 요소
-User->>Trigger: 클릭 상호작용 발생
-Trigger->>Engine: popovertarget 액션 전달
-Engine->>Popover: beforetoggle 이벤트 발화(cancelable true)
-alt e.preventDefault 호출
-Popover-->>Engine: 전이 취소
-else 기본 동작 수행
-Engine->>Engine: Top Layer 승격 및 CloseWatcher 스택 등록
-Engine->>Popover: toggle 이벤트 발화(cancelable false)
-Popover-->>User: 화면에 팝오버 렌더링 표시
-end
-User->>Engine: 외부 영역 클릭 또는 Escape 키 입력
-Engine->>Popover: beforetoggle 이벤트 발화(cancelable false)
-Engine->>Engine: Top Layer 제거 및 이전 활성 요소 포커스 복원
-Engine->>Popover: toggle 이벤트 발화(cancelable false)
-Popover-->>User: 화면 닫힘 및 기본 스타일 복귀
+```diagram
+종류: 시퀀스
+
+[사용자]
+[트리거 버튼]
+[브라우저 엔진]
+[팝오버 요소]
+
+사용자 -> 트리거 버튼 : 클릭 상호작용 발생
+트리거 버튼 -> 브라우저 엔진 : popovertarget 액션 전달
+브라우저 엔진 -> 팝오버 요소 : beforetoggle 이벤트 발화(cancelable true)
+== e.preventDefault 호출 ==
+팝오버 요소 --> 브라우저 엔진 : 전이 취소
+== 기본 동작 수행 ==
+브라우저 엔진 -> 브라우저 엔진 : Top Layer 승격 및 CloseWatcher 스택 등록
+브라우저 엔진 -> 팝오버 요소 : toggle 이벤트 발화(cancelable false)
+팝오버 요소 --> 사용자 : 화면에 팝오버 렌더링 표시
+사용자 -> 브라우저 엔진 : 외부 영역 클릭 또는 Escape 키 입력
+브라우저 엔진 -> 팝오버 요소 : beforetoggle 이벤트 발화(cancelable false)
+브라우저 엔진 -> 브라우저 엔진 : Top Layer 제거 및 이전 활성 요소 포커스 복원
+브라우저 엔진 -> 팝오버 요소 : toggle 이벤트 발화(cancelable false)
+팝오버 요소 --> 사용자 : 화면 닫힘 및 기본 스타일 복귀
 ```
 
 스펙에 따른 세부 수명주기 단계와 계산 시점은 다음과 같다.
