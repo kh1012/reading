@@ -44,18 +44,20 @@ CryptoKey 객체는 W3C 구조화된 복제 알고리즘을 지원한다 [2]. �
 ## 3. 동작 원리
 crypto.subtle의 모든 암호화 메서드는 호출 즉시 메인 스레드를 차단하지 않고 Promise 객체를 반환한다 [3]. 실제 연산은 브라우저 하위의 C++/Rust 네이티브 암호화 엔진(Chromium 계열의 BoringSSL, Firefox의 NSS, WebKit의 CommonCrypto)이 관리하는 백그라운드 스레드 풀에서 비동기로 실행된다 [3].
 
-```mermaid
-sequenceDiagram
-  participant JS as JavaScript
-  participant WebAPI as crypto.subtle
-  participant Pool as Thread Pool
-  participant Native as Native Engine
-  JS->>WebAPI: encrypt(params, key, data)
-  WebAPI->>Pool: dispatch task
-  WebAPI-->>JS: return Promise
-  Pool->>Native: execute AES-GCM
-  Native-->>Pool: return ciphertext
-  Pool->>JS: resolve Promise (microtask)
+```diagram
+종류: 시퀀스
+
+[JavaScript]
+[crypto.subtle]
+[Thread Pool]
+[Native Engine]
+
+JavaScript -> crypto.subtle : encrypt(params, key, data)
+crypto.subtle -> Thread Pool : dispatch task
+crypto.subtle --> JavaScript : return Promise
+Thread Pool -> Native Engine : execute AES-GCM
+Native Engine --> Thread Pool : return ciphertext
+Thread Pool -> JavaScript : resolve Promise (microtask)
 ```
 
 연산 수행 절차와 브라우저 내부 스케줄링 흐름은 다음과 같다.
