@@ -37,19 +37,21 @@ Intersection Observer의 교차 계산 알고리즘은 WHATWG HTML 명세에 정
 
 관찰 중인 대상 요소의 교차율이 설정된 `threshold` 경계를 넘어서면 브라우저는 내부 큐(`[[QueuedEntries]]`)에 새 `IntersectionObserverEntry` 객체를 적재한다 [1][2]. 이후 브라우저는 이벤트 루프의 태스크 큐(Task Queue)에 콜백 실행을 위한 비동기 매크로태스크를 발행한다 [1][2]. 따라서 교차 계산 자체는 브라우저 내부 렌더링 파이프라인에서 최적화되어 메인 스레드의 동기 레이아웃 재계산을 유발하지 않으며, 최종 콜백 함수 호출만 메인 스레드 태스크 큐를 통해 비동기로 수행된다 [1][2][4].
 
-```mermaid
-sequenceDiagram
-    participant User as 사용자 및 스크롤
-    participant Engine as 브라우저 엔진
-    participant Pipeline as 렌더링 파이프라인
-    participant TaskQueue as 태스크 큐
-    User->>Engine: 스크롤 및 레이아웃 변형 발생
-    Engine->>Pipeline: 렌더링 갱신 단계 진입
-    Pipeline->>Pipeline: 스타일 및 레이아웃 재계산
-    Pipeline->>Pipeline: 교차 관찰 갱신 단계 실행
-    Pipeline->>TaskQueue: 임계값 초과 항목 저장 및 태스크 발행
-    Pipeline->>Engine: 화면 페인트 완료
-    TaskQueue->>Engine: 등록된 옵저버 콜백 비동기 실행
+```diagram
+종류: 시퀀스
+
+[사용자 및 스크롤]
+[브라우저 엔진]
+[렌더링 파이프라인]
+[태스크 큐]
+
+사용자 및 스크롤 -> 브라우저 엔진 : 스크롤 및 레이아웃 변형 발생
+브라우저 엔진 -> 렌더링 파이프라인 : 렌더링 갱신 단계 진입
+렌더링 파이프라인 -> 렌더링 파이프라인 : 스타일 및 레이아웃 재계산
+렌더링 파이프라인 -> 렌더링 파이프라인 : 교차 관찰 갱신 단계 실행
+렌더링 파이프라인 -> 태스크 큐 : 임계값 초과 항목 저장 및 태스크 발행
+렌더링 파이프라인 -> 브라우저 엔진 : 화면 페인트 완료
+태스크 큐 -> 브라우저 엔진 : 등록된 옵저버 콜백 비동기 실행
 ```
 
 ## 4. 기본 사용법
