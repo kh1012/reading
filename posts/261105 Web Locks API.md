@@ -45,25 +45,26 @@ Web Locks API의 실행 수명주기는 콜백 함수가 반환하는 Promise의
 3. 작업 수행 및 원자적 해제: 콜백 함수 내부의 비동기 작업이 수행되며, 콜백이 반환한 Promise가 resolve되거나 reject되는 순간 브라우저 엔진이 원자적으로 락을 해제한다 [1] [3]. 락이 해제되면 큐의 다음 요청이 즉시 스케줄링된다.
 4. 비정상 종료 시 자동 정리: 락을 보유한 탭이 예기치 않게 종료되거나 사용자가 창을 닫거나 다른 페이지로 탐색(Navigation)하면, 브라우저의 문서 언로드 정리 단계에서 보유 중인 락과 대기 큐의 요청이 즉시 회수 및 중단된다 [1].
 
-```mermaid
-sequenceDiagram
-    participant TabA as Tab A
-    participant TabB as Tab B
-    participant LM as LockManager
-    participant Res as Shared Resource
+```diagram
+종류: 시퀀스
 
-    TabA->>LM: request auth_lock
-    LM->>LM: Register in FIFO Queue
-    LM-->>TabA: Grant Lock and Invoke Callback
-    TabA->>Res: Read and Write Data
-    TabB->>LM: request auth_lock
-    LM->>LM: Wait in FIFO Queue
-    TabA-->>LM: Promise Resolved
-    LM->>LM: Release Lock
-    LM-->>TabB: Grant Lock and Invoke Callback
-    TabB->>Res: Read and Write Data
-    TabB-->>LM: Promise Resolved
-    LM->>LM: Release Lock
+[Tab A]
+[Tab B]
+[LockManager]
+[Shared Resource]
+
+Tab A -> LockManager : request auth_lock
+LockManager -> LockManager : Register in FIFO Queue
+LockManager --> Tab A : Grant Lock and Invoke Callback
+Tab A -> Shared Resource : Read and Write Data
+Tab B -> LockManager : request auth_lock
+LockManager -> LockManager : Wait in FIFO Queue
+Tab A --> LockManager : Promise Resolved
+LockManager -> LockManager : Release Lock
+LockManager --> Tab B : Grant Lock and Invoke Callback
+Tab B -> Shared Resource : Read and Write Data
+Tab B --> LockManager : Promise Resolved
+LockManager -> LockManager : Release Lock
 ```
 
 옵션 플래그에 따른 특수 동작 원리는 다음과 같다:
