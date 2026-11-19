@@ -19,12 +19,19 @@ Web Components는 세 가지 핵심 표준 기술의 조합으로 이루어집�
 
 Web Components의 생명주기는 브라우저가 커스텀 요소를 파싱하고 연결하는 과정에서 결정됩니다.
 
-```mermaid
-flowchart TD
-    A[JS: customElements.define] --> B[HTML: <my-element>]
-    B --> C{Shadow DOM 생성}
-    C -->|attachShadow| D[DOM 렌더링]
-    D --> E[생명주기 콜백: connectedCallback]
+```diagram
+@align center
+
+[JS: `customElements.define`]
+[HTML: `<my-element>`]
+[Shadow DOM 생성] 조건
+[DOM 렌더링]
+[생명주기 콜백: `connectedCallback`]
+
+JS: `customElements.define` -> HTML: `<my-element>`
+HTML: `<my-element>` -> Shadow DOM 생성
+Shadow DOM 생성 -> DOM 렌더링 : attachShadow
+DOM 렌더링 -> 생명주기 콜백: `connectedCallback`
 ```
 
 브라우저는 정의된 Custom Element를 만나면 Shadow DOM을 생성하고 내부 스타일과 구조를 분리합니다. 이 과정에서 외부 CSS가 내부로 침투하지 못하고, 내부 스타일이 외부로 유출되지 않도록 표준 스펙에 따라 강력하게 격리됩니다[1].
