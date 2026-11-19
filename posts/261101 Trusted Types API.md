@@ -41,23 +41,24 @@ HTTP 응답 헤더로 Content-Security-Policy: require-trusted-types-for 'script
 
 또한 애플리케이션 코드가 window.trustedTypes.createPolicy(name, options)를 호출하여 정책을 생성할 때, 브라우저 엔진은 HTTP 응답 헤더의 trusted-types 지시문에 선언된 화이트리스트 목록과 정책 이름을 즉시 대조한다 [1] [3]. 허용 목록에 없는 정책 이름을 생성하려고 시도하거나, 이미 등록된 이름을 allow-duplicates 키워드 없이 중복 등록하려 할 경우 엔진은 즉시 TypeError를 발생시키며 정책 등록을 거부한다 [1] [3].
 
-```mermaid
-sequenceDiagram
-    participant App
-    participant WebIDL
-    participant Policy
-    participant Engine
-    App->>WebIDL: innerHTML에 값 전달
-    alt TrustedHTML 인스턴스인 경우
-        WebIDL->>Engine: 불변 데이터 추출 후 반영
-        Engine-->>App: DOM 업데이트 완료
-    else 원시 문자열 및 default 정책 등록 시
-        WebIDL->>Policy: default.createHTML 실행
-        Policy-->>WebIDL: 변환된 문자열 반환
-        WebIDL->>Engine: DOM 업데이트 수행
-    else 원시 문자열 및 default 정책 부재 시
-        WebIDL-->>App: TypeError 발생 및 차단
-    end
+```diagram
+종류: 시퀀스
+
+[App]
+[WebIDL]
+[Policy]
+[Engine]
+
+App -> WebIDL : innerHTML에 값 전달
+== TrustedHTML 인스턴스인 경우 ==
+WebIDL -> Engine : 불변 데이터 추출 후 반영
+Engine --> App : DOM 업데이트 완료
+== 원시 문자열 및 default 정책 등록 시 ==
+WebIDL -> Policy : default.createHTML 실행
+Policy --> WebIDL : 변환된 문자열 반환
+WebIDL -> Engine : DOM 업데이트 수행
+== 원시 문자열 및 default 정책 부재 시 ==
+WebIDL --> App : TypeError 발생 및 차단
 ```
 
 ## 4. 기본 사용법
