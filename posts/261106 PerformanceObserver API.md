@@ -36,17 +36,19 @@ PerformanceObserver API를 구성하는 핵심 용어와 공간 구조는 다음
 - takeRecords(): 이벤트 루프의 태스크 큐 처리를 기다리지 않고 현재 observer buffer 에 대기 중인 모든 성능 엔트리를 동기적으로 비워내며 배열로 즉시 반환한다[1][4].
 - disconnect(): 해당 PerformanceObserver 를 전역 관찰자 레지스트리에서 완전히 제거하고 observer buffer 내부 큐를 초기화하여 메모리를 정리한다[1][4].
 
-```mermaid
-sequenceDiagram
-    participant B as Browser Engine
-    participant Q as Queue Algorithm
-    participant O as Observer Buffer
-    participant E as Event Loop Callback
-    B->>Q: 성능 엔트리 생성
-    Q->>O: 관찰 대상 타입 엔트리 추가
-    Q->>E: Task Source 비동기 태스크 발행
-    E->>O: Observer Buffer 엔트리 비우기
-    E->>E: 콜백 함수로 EntryList 전달
+```diagram
+종류: 시퀀스
+
+[Browser Engine]
+[Queue Algorithm]
+[Observer Buffer]
+[Event Loop Callback]
+
+Browser Engine -> Queue Algorithm : 성능 엔트리 생성
+Queue Algorithm -> Observer Buffer : 관찰 대상 타입 엔트리 추가
+Queue Algorithm -> Event Loop Callback : Task Source 비동기 태스크 발행
+Event Loop Callback -> Observer Buffer : Observer Buffer 엔트리 비우기
+Event Loop Callback -> Event Loop Callback : 콜백 함수로 EntryList 전달
 ```
 
 ## 4. 기본 사용법
