@@ -29,27 +29,28 @@
 
 취소 절차는 `controller.abort(reason)`가 호출되는 시점에 동기적으로 시작되며, WHATWG DOM 명세의 Signal abort steps에 따라 순차 실행된다 [1].
 
-```mermaid
-sequenceDiagram
-  autonumber
-  participant Caller as "호출자 (Caller)"
-  participant Controller as "AbortController"
-  participant Signal as "AbortSignal"
-  participant Network as "네트워크 소켓 / Fetch API"
-  participant Listener as "이벤트 리스너 (EventTarget)"
+```diagram
+종류: 시퀀스
+번호: 켬
 
-  Caller->>Controller: "new AbortController()"
-  Controller->>Signal: "단일 AbortSignal 인스턴스 생성 및 연결"
-  Caller->>Network: "fetch(url, { signal })"
-  Network->>Signal: "abort algorithms에 소켓 중단 알고리즘 등록"
-  Caller->>Listener: "addEventListener(type, handler, { signal })"
-  Listener->>Signal: "abort algorithms에 removeEventListener 등록"
-  Caller->>Controller: "abort(reason)"
-  Controller->>Signal: "aborted = true 설정 및 reason 저장"
-  Signal->>Network: "abort algorithms 실행: 소켓 전송 즉시 차단 및 스트림 정리"
-  Signal->>Listener: "abort algorithms 실행: 리스너 자동 제거"
-  Signal->>Signal: "'abort' 이벤트 디스패치"
-  Network-->>Caller: "Promise rejection (AbortError DOMException)"
+[호출자 (Caller)]
+[AbortController]
+[AbortSignal]
+[네트워크 소켓 / Fetch API]
+[이벤트 리스너 (EventTarget)]
+
+호출자 (Caller) -> AbortController : new AbortController()
+AbortController -> AbortSignal : 단일 AbortSignal 인스턴스 생성 및 연결
+호출자 (Caller) -> 네트워크 소켓 / Fetch API : fetch(url, { signal })
+네트워크 소켓 / Fetch API -> AbortSignal : abort algorithms에 소켓 중단 알고리즘 등록
+호출자 (Caller) -> 이벤트 리스너 (EventTarget) : addEventListener(type, handler, { signal })
+이벤트 리스너 (EventTarget) -> AbortSignal : abort algorithms에 removeEventListener 등록
+호출자 (Caller) -> AbortController : abort(reason)
+AbortController -> AbortSignal : aborted = true 설정 및 reason 저장
+AbortSignal -> 네트워크 소켓 / Fetch API : abort algorithms 실행: 소켓 전송 즉시 차단 및 스트림 정리
+AbortSignal -> 이벤트 리스너 (EventTarget) : abort algorithms 실행: 리스너 자동 제거
+AbortSignal -> AbortSignal : 'abort' 이벤트 디스패치
+네트워크 소켓 / Fetch API --> 호출자 (Caller) : Promise rejection (AbortError DOMException)
 ```
 
 1. **상태 검증 및 멱등성 보장**: `controller.abort()`가 호출되면 먼저 시그널의 내부 `aborted` 플래그를 확인한다 [1]. 이미 `true`로 설정되어 있다면 아무런 동작도 수행하지 않고 즉시 반환하여 멱등성을 보장한다 [1].
