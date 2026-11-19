@@ -43,23 +43,25 @@ Pointer Events는 W3C 명세에 따라 MouseEvent 인터페이스를 상속하�
 
 이벤트 생명주기는 물리적 접촉부터 해제까지의 상태 전이를 기반으로 동작한다 [1][2].
 
-```mermaid
-sequenceDiagram
-    participant User as 사용자 입력
-    participant Comp as 브라우저 컴포지터
-    participant Main as 메인 스레드
-    participant Target as 타깃 엘리먼트
-    User->>Comp: 터치 또는 마우스 접촉
-    Comp->>Main: pointerdown 이벤트 전달
-    Main->>Target: setPointerCapture 호출
-    Target-->>Main: gotpointercapture 발화
-    User->>Comp: 포인터 이동
-    Comp->>Comp: touch-action 검사
-    Comp->>Main: pointermove 전달
-    Main->>Target: getCoalescedEvents 좌표 처리
-    User->>Comp: 접촉 해제
-    Comp->>Main: pointerup 전달
-    Target-->>Main: lostpointercapture 발화
+```diagram
+종류: 시퀀스
+
+[사용자 입력]
+[브라우저 컴포지터]
+[메인 스레드]
+[타깃 엘리먼트]
+
+사용자 입력 -> 브라우저 컴포지터 : 터치 또는 마우스 접촉
+브라우저 컴포지터 -> 메인 스레드 : pointerdown 이벤트 전달
+메인 스레드 -> 타깃 엘리먼트 : setPointerCapture 호출
+타깃 엘리먼트 --> 메인 스레드 : gotpointercapture 발화
+사용자 입력 -> 브라우저 컴포지터 : 포인터 이동
+브라우저 컴포지터 -> 브라우저 컴포지터 : touch-action 검사
+브라우저 컴포지터 -> 메인 스레드 : pointermove 전달
+메인 스레드 -> 타깃 엘리먼트 : getCoalescedEvents 좌표 처리
+사용자 입력 -> 브라우저 컴포지터 : 접촉 해제
+브라우저 컴포지터 -> 메인 스레드 : pointerup 전달
+타깃 엘리먼트 --> 메인 스레드 : lostpointercapture 발화
 ```
 
 1. 이벤트 디스패치 및 컴포지터 판정 단계
