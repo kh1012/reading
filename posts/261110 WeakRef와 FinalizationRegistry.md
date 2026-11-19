@@ -27,19 +27,20 @@ WeakRef와 FinalizationRegistry는 힙 메모리 관리의 유연성을 확보�
 ## 3. 동작 원리
 WeakRef와 FinalizationRegistry의 동작은 ECMAScript 언어 사양과 WHATWG HTML 이벤트 루프 사양의 명확한 연동 규칙을 기반으로 실행된다.
 
-```mermaid
-sequenceDiagram
-  actor App as 애플리케이션
-  participant WR as WeakRef 및 FR
-  participant GC as 가비지 컬렉터
-  participant Loop as 이벤트 루프 태스크 큐
+```diagram
+종류: 시퀀스
 
-  App->>WR: deref 호출
-  WR->>App: AddToKeptObjects 등록 후 객체 반환
-  Note over WR,GC: 현재 Job 동안 수거 방지
-  GC->>GC: Job 종료 후 객체 메모리 회수
-  GC->>Loop: HostEnqueueFinalizationRegistryCleanupJob 호출
-  Loop->>App: cleanupCallback 비동기 실행 및 heldValue 전달
+[애플리케이션]
+[WeakRef 및 FR]
+[가비지 컬렉터]
+[이벤트 루프 태스크 큐]
+
+애플리케이션 -> WeakRef 및 FR : deref 호출
+WeakRef 및 FR -> 애플리케이션 : AddToKeptObjects 등록 후 객체 반환
+== 현재 Job 동안 수거 방지 ==
+가비지 컬렉터 -> 가비지 컬렉터 : Job 종료 후 객체 메모리 회수
+가비지 컬렉터 -> 이벤트 루프 태스크 큐 : HostEnqueueFinalizationRegistryCleanupJob 호출
+이벤트 루프 태스크 큐 -> 애플리케이션 : cleanupCallback 비동기 실행 및 heldValue 전달
 ```
 
 ECMAScript 사양은 읽기 일관성(Read Consistency)을 보장하기 위해 WeakRef 생성 및 `deref()` 실행 시 추상 연산 `AddToKeptObjects(target)`를 호출하도록 규정한다 [1]. `AddToKeptObjects`에 등록된 객체는 현재 마이크로태스크 체크포인트 또는 Job이 완료될 때까지 가비지 컬렉터에 의해 수거되지 않는다 [1]. 해당 Job이 완전히 종료되는 시점에 엔진은 Kept Objects 목록을 비워 다음 턴부터 객체가 정상적으로 GC 대상이 되도록 만든다 [1].
