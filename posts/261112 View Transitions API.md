@@ -35,27 +35,29 @@ View Transitions API를 이해하기 위한 핵심 개념은 브라우저 렌더
 ## 3. 동작 원리
 View Transitions API는 자바스크립트 메인 스레드와 브라우저 엔진의 렌더링 파이프라인, 그리고 그래픽 합성기(Compositor) 스레드가 상호 동기화되며 순차적으로 실행된다 [1] [3] [4].
 
-```mermaid
-sequenceDiagram
-    autonumber
-    participant Script
-    participant Browser
-    participant DOM
-    participant Compositor
-    Script->>Browser: startViewTransition(callback)
-    Browser->>Compositor: 이전 화면 스냅샷 캡처
-    Browser->>Browser: 렌더링 억제 플래그 활성화
-    Browser->>Script: updateCallback 실행
-    Script->>DOM: DOM 상태 변경
-    DOM-->>Browser: DOM 변경 완료(Promise 이행)
-    Browser->>Script: updateCallbackDone 해결
-    Browser->>Compositor: 새 화면 스냅샷 캡처
-    Browser->>DOM: ::view-transition 의사 요소 트리 구축
-    Browser->>Browser: 렌더링 억제 플래그 해제
-    Browser->>Script: ready 프로미스 해결
-    Compositor->>Compositor: CSS 애니메이션 보간 실행
-    Compositor-->>DOM: 의사 요소 트리 제거
-    Browser->>Script: finished 프로미스 해결
+```diagram
+종류: 시퀀스
+번호: 켬
+
+[Script]
+[Browser]
+[DOM]
+[Compositor]
+
+Script -> Browser : startViewTransition(callback)
+Browser -> Compositor : 이전 화면 스냅샷 캡처
+Browser -> Browser : 렌더링 억제 플래그 활성화
+Browser -> Script : updateCallback 실행
+Script -> DOM : DOM 상태 변경
+DOM --> Browser : DOM 변경 완료(Promise 이행)
+Browser -> Script : updateCallbackDone 해결
+Browser -> Compositor : 새 화면 스냅샷 캡처
+Browser -> DOM : ::view-transition 의사 요소 트리 구축
+Browser -> Browser : 렌더링 억제 플래그 해제
+Browser -> Script : ready 프로미스 해결
+Compositor -> Compositor : CSS 애니메이션 보간 실행
+Compositor --> DOM : 의사 요소 트리 제거
+Browser -> Script : finished 프로미스 해결
 ```
 
 1. **초기 호출 및 상태 캡처**: 개발자 스크립트가 `document.startViewTransition(updateCallback)`을 호출하면 브라우저 엔진은 전환 라이프사이클을 생성한다 [1] [4]. 브라우저는 현재 화면의 시각적 상태를 래스터 비트맵 스냅샷으로 즉시 캡처한다 [1] [4].
