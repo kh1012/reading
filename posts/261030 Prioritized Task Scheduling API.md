@@ -32,20 +32,21 @@ Prioritized Task Scheduling API는 브라우저가 관리하는 우선순위 큐
 ## 3. 동작 원리
 Prioritized Task Scheduling API는 W3C WICG Scheduling APIs 명세에 정의된 다중 우선순위 큐 모델을 기반으로 동작한다 [1]. 
 
-```mermaid
-sequenceDiagram
-    autonumber
-    participant Task as 긴 연산 태스크
-    participant Sched as scheduler
-    participant Loop as 브라우저 이벤트 루프
-    participant Render as 렌더링 및 입력 처리
+```diagram
+종류: 시퀀스
+번호: 켬
 
-    Task->>Sched: scheduler.yield 호출
-    Sched->>Loop: 메인 스레드 제어권 양보
-    Loop->>Render: 렌더링 파이프라인 및 UI 이벤트 디스패치
-    Render-->>Loop: 화면 갱신 완료
-    Loop->>Sched: 동일 우선순위 큐 선두의 continuation 디스패치
-    Sched-->>Task: await 반환 및 연산 루프 즉시 재개
+[긴 연산 태스크]
+[scheduler]
+[브라우저 이벤트 루프]
+[렌더링 및 입력 처리]
+
+긴 연산 태스크 -> scheduler : scheduler.yield 호출
+scheduler -> 브라우저 이벤트 루프 : 메인 스레드 제어권 양보
+브라우저 이벤트 루프 -> 렌더링 및 입력 처리 : 렌더링 파이프라인 및 UI 이벤트 디스패치
+렌더링 및 입력 처리 --> 브라우저 이벤트 루프 : 화면 갱신 완료
+브라우저 이벤트 루프 -> scheduler : 동일 우선순위 큐 선두의 continuation 디스패치
+scheduler --> 긴 연산 태스크 : await 반환 및 연산 루프 즉시 재개
 ```
 
 1. **태스크 등록 및 큐잉 시점**: `scheduler.postTask(callback, options)`가 호출되면, 브라우저는 지정된 `priority`(또는 `signal`의 우선순위)를 확인하여 `user-blocking`, `user-visible`, `background` 중 적합한 내부 큐에 콜백을 삽입한다 [1] [2]. 만약 `delay` 옵션이 설정되어 있다면 타이머가 만료된 후 해당 우선순위 큐로 전이된다 [1] [2].
