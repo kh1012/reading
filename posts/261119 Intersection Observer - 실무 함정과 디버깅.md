@@ -8,14 +8,16 @@ IntersectionObserver API는 DOM 요소가 뷰포트나 특정 상위 컨테이�
 ## 2. 이번 관점: 실무 함정과 디버깅
 Intersection Observer는 기본적으로 성능 최적화가 잘 설계된 API이지만, 실무 적용 시 개발자의 설계 방식에 따라 Subtle한 성능 저하나 오작동이 발생한다. 가장 빈번한 함정은 observe() 호출 직후 콜백이 의도치 않게 즉시 실행되는 동작 [3][6]을 간과하는 것이다. 이는 요소의 가시성과 관계없이 이루어지며, 초기화 로직에서 사이드 이펙트를 유발할 수 있다. 또한, 많은 수의 threshold 값을 설정하면 브라우저는 스크롤 시마다 지속적으로 계산을 수행하여 오히려 성능을 저하시킨다 [4][7]. 관찰 대상이 복잡해질수록 콜백 함수가 메인 스레드 차단을 유발하지 않도록 가볍게 유지하는 설계가 필요하다 [1][2].
 
-```mermaid
-sequenceDiagram
-    participant Browser
-    participant IO
-    participant MainThread
-    Browser->>IO: 가시성 계산
-    IO->>MainThread: 콜백 전달 (비동기)
-    MainThread->>MainThread: 콜백 로직 실행
+```diagram
+종류: 시퀀스
+
+[Browser]
+[IO]
+[MainThread]
+
+Browser -> IO : 가시성 계산
+IO -> MainThread : 콜백 전달 (비동기)
+MainThread -> MainThread : 콜백 로직 실행
 ```
 
 ## 3. 실증 사례
