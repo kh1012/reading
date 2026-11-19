@@ -34,30 +34,31 @@ OPFS를 이해하기 위한 핵심 개념과 인터페이스는 다음과 같다
 ## 3. 동작 원리
 OPFS의 I/O 동작 원리는 접근 컨텍스트(메인 스레드 vs Dedicated Web Worker)와 핸들 종류에 따라 명확히 구분된다.
 
-```mermaid
-sequenceDiagram
-    participant Main as MainThread
-    participant Worker as DedicatedWorker
-    participant OPFS as OPFSEngine
-    participant Disk as StorageDisk
+```diagram
+종류: 시퀀스
 
-    Main->>Worker: postMessage(startSyncTask)
-    Worker->>OPFS: navigator.storage.getDirectory()
-    OPFS-->>Worker: FileSystemDirectoryHandle
-    Worker->>OPFS: getFileHandle(app.db, create)
-    OPFS-->>Worker: FileSystemFileHandle
-    Worker->>OPFS: createSyncAccessHandle()
-    OPFS->>Disk: acquireExclusiveLock()
-    OPFS-->>Worker: FileSystemSyncAccessHandle
-    Worker->>Disk: write(data, at: 0)
-    Disk-->>Worker: bytesWritten
-    Worker->>Disk: flush()
-    Disk-->>Worker: fsyncCompleted
-    Worker->>Disk: read(buffer, at: 0)
-    Disk-->>Worker: bytesRead
-    Worker->>OPFS: close()
-    OPFS->>Disk: releaseExclusiveLock()
-    Worker->>Main: postMessage(taskFinished)
+[MainThread]
+[DedicatedWorker]
+[OPFSEngine]
+[StorageDisk]
+
+MainThread -> DedicatedWorker : postMessage(startSyncTask)
+DedicatedWorker -> OPFSEngine : navigator.storage.getDirectory()
+OPFSEngine --> DedicatedWorker : FileSystemDirectoryHandle
+DedicatedWorker -> OPFSEngine : getFileHandle(app.db, create)
+OPFSEngine --> DedicatedWorker : FileSystemFileHandle
+DedicatedWorker -> OPFSEngine : createSyncAccessHandle()
+OPFSEngine -> StorageDisk : acquireExclusiveLock()
+OPFSEngine --> DedicatedWorker : FileSystemSyncAccessHandle
+DedicatedWorker -> StorageDisk : write(data, at: 0)
+StorageDisk --> DedicatedWorker : bytesWritten
+DedicatedWorker -> StorageDisk : flush()
+StorageDisk --> DedicatedWorker : fsyncCompleted
+DedicatedWorker -> StorageDisk : read(buffer, at: 0)
+StorageDisk --> DedicatedWorker : bytesRead
+DedicatedWorker -> OPFSEngine : close()
+OPFSEngine -> StorageDisk : releaseExclusiveLock()
+DedicatedWorker -> MainThread : postMessage(taskFinished)
 ```
 
 ### 1. 엔드포인트 해석 및 디렉터리 탐색
