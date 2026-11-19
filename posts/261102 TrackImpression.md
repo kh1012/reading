@@ -36,18 +36,20 @@ Intersection Observer는 자바스크립트 메인 스레드 루프 안에서 �
 
 WHATWG HTML 표준의 8.1.7.3 'Update the rendering' 명세에 따르면 브라우저는 매 프레임 렌더링 갱신 시 `requestAnimationFrame` 콜백을 실행하고 스타일 및 레이아웃을 계산한 뒤, 실제 화면을 그리는 페인트 직전에 'update intersection observations steps'를 실행하여 교차 상태를 갱신한다 [1][3]. 브라우저 내부 렌더 트리의 최신 기하 구조를 활용하여 비동기 계산하므로 자바스크립트의 동기식 강제 리플로우를 유발하지 않는다 [1][6].
 
-```mermaid
-sequenceDiagram
-  autonumber
-  participant User as 사용자
-  participant EventLoop as 이벤트 루프
-  participant RenderEngine as 렌더 엔진
-  participant Callback as 콜백 함수
-  User->>EventLoop: 스크롤 및 화면 갱신
-  EventLoop->>RenderEngine: requestAnimationFrame 실행
-  RenderEngine->>RenderEngine: update intersection observations
-  RenderEngine->>Callback: 임계치 교차 시 작업 큐 등록
-  Callback->>User: 타이머 개시 및 비콘 전송
+```diagram
+종류: 시퀀스
+번호: 켬
+
+[사용자]
+[이벤트 루프]
+[렌더 엔진]
+[콜백 함수]
+
+사용자 -> 이벤트 루프 : 스크롤 및 화면 갱신
+이벤트 루프 -> 렌더 엔진 : requestAnimationFrame 실행
+렌더 엔진 -> 렌더 엔진 : update intersection observations
+렌더 엔진 -> 콜백 함수 : 임계치 교차 시 작업 큐 등록
+콜백 함수 -> 사용자 : 타이머 개시 및 비콘 전송
 ```
 
 이벤트 루프 처리 모델에서 교차 임계치(threshold) 통과가 감지되면 브라우저는 관찰자 콜백을 태스크 큐에 등록하여 다음 틱에서 비동기적으로 실행한다 [1][3].
