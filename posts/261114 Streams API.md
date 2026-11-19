@@ -44,20 +44,22 @@ ReadableStream은 내부 슬롯으로 청크를 임시 보관하는 큐([[queue]
 ## 3. 동작 원리
 스트림의 실행 흐름은 큐잉 전략과 리더의 읽기 요청에 따라 엄격하게 제어된다 [1].
 
-```mermaid
-sequenceDiagram
-    participant Source
-    participant Controller
-    participant Engine
-    participant Reader
-    Reader->>Engine: getReader()
-    Engine->>Reader: lock stream
-    Reader->>Engine: read()
-    Engine->>Engine: check desiredSize
-    Engine->>Source: pull()
-    Source->>Controller: enqueue(chunk)
-    Controller->>Engine: update queueTotalSize
-    Engine->>Reader: resolve chunk
+```diagram
+종류: 시퀀스
+
+[Source]
+[Controller]
+[Engine]
+[Reader]
+
+Reader -> Engine : getReader()
+Engine -> Reader : lock stream
+Reader -> Engine : read()
+Engine -> Engine : check desiredSize
+Engine -> Source : pull()
+Source -> Controller : enqueue(chunk)
+Controller -> Engine : update queueTotalSize
+Engine -> Reader : resolve chunk
 ```
 
 스트림 엔진의 내부 동작과 수명 주기는 다음 명세 규칙을 따른다 [1].
