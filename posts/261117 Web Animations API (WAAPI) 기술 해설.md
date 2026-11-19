@@ -13,12 +13,20 @@ WAAPI의 중심에는 `Animation`과 `KeyframeEffect`가 있습니다. `Keyframe
 ## 3. 동작 원리
 WAAPI는 CSS와 동일한 브라우저 엔진 아키텍처를 공유하여 컴포지터 스레드에서 하드웨어 가속을 수행합니다 [3]. `play()` 호출 시 애니메이션이 타임라인에 등록되고, 브라우저는 렌더링 루프마다 현재 시간을 기반으로 상태를 계산하여 화면을 업데이트합니다.
 
-```mermaid
-flowchart LR
-    JS["JavaScript"] -->|".animate()"| Effect["KeyframeEffect"]
-    Effect -->|create| Anim["Animation Object"]
-    Anim -->|".play()"| Engine["Browser Engine (Compositor)"]
-    Engine -->|Render| Screen["Display"]
+```diagram
+@align center
+@dir right
+
+[JavaScript]
+[KeyframeEffect]
+[Animation Object]
+[Browser Engine (Compositor)]
+[Display]
+
+JavaScript -> KeyframeEffect : .animate()
+KeyframeEffect -> Animation Object : create
+Animation Object -> Browser Engine (Compositor) : .play()
+Browser Engine (Compositor) -> Display : Render
 ```
 
 ## 4. 기본 사용법
