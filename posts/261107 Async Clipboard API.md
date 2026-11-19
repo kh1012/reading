@@ -36,18 +36,20 @@ Async Clipboard API를 구성하는 핵심 인터페이스와 보안 개념은 �
 ## 3. 동작 원리
 Async Clipboard API는 운영체제의 클립보드 하위 시스템과 브라우저 보안 계층 사이에서 비동기 검증 파이프라인을 거쳐 실행된다 [1].
 
-```mermaid
-sequenceDiagram
-    actor User as 사용자
-    participant WebApp as 웹앱
-    participant Browser as 브라우저
-    participant OS as OS클립보드
-    User->>WebApp: 복사 버튼 클릭
-    WebApp->>Browser: write(ClipboardItem)
-    Browser->>Browser: 보안 컨텍스트 및 활성화 검증
-    Browser->>OS: 데이터 쓰기 비동기 요청
-    OS-->>Browser: I/O 완료 응답
-    Browser-->>WebApp: Promise 해결
+```diagram
+종류: 시퀀스
+
+[사용자]
+[웹앱]
+[브라우저]
+[OS클립보드]
+
+사용자 -> 웹앱 : 복사 버튼 클릭
+웹앱 -> 브라우저 : write(ClipboardItem)
+브라우저 -> 브라우저 : 보안 컨텍스트 및 활성화 검증
+브라우저 -> OS클립보드 : 데이터 쓰기 비동기 요청
+OS클립보드 --> 브라우저 : I/O 완료 응답
+브라우저 --> 웹앱 : Promise 해결
 ```
 
 동작 과정은 다음 단계로 진행된다.
