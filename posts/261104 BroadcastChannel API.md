@@ -31,19 +31,20 @@ BroadcastChannel API를 정확히 이해하고 다루기 위해서는 플랫폼 
 ## 3. 동작 원리
 BroadcastChannel의 메시지 송수신 흐름은 WHATWG HTML Living Standard Section 9.5 규격에 엄격한 알고리즘 단계로 명시되어 있다 [1].
 
-```mermaid
-sequenceDiagram
-    participant S as 발신 컨텍스트
-    participant K as 브라우저 커널
-    participant E as 대상 이벤트 루프
-    participant D as 대상 컨텍스트
+```diagram
+종류: 시퀀스
 
-    S->>K: postMessage(message)
-    K->>K: StructuredSerialize(data)
-    K->>K: StorageKey 및 대상 선별
-    K->>E: DOM 조작 태스크 큐잉
-    E->>D: StructuredDeserialize(data)
-    D->>D: message 이벤트 디스패치
+[발신 컨텍스트]
+[브라우저 커널]
+[대상 이벤트 루프]
+[대상 컨텍스트]
+
+발신 컨텍스트 -> 브라우저 커널 : postMessage(message)
+브라우저 커널 -> 브라우저 커널 : StructuredSerialize(data)
+브라우저 커널 -> 브라우저 커널 : StorageKey 및 대상 선별
+브라우저 커널 -> 대상 이벤트 루프 : DOM 조작 태스크 큐잉
+대상 이벤트 루프 -> 대상 컨텍스트 : StructuredDeserialize(data)
+대상 컨텍스트 -> 대상 컨텍스트 : message 이벤트 디스패치
 ```
 
 1. **메시지 발행 호출 및 직렬화**: 발신 컨텍스트에서 `BroadcastChannel.prototype.postMessage(message)`가 호출되면, 브라우저는 인자로 전달된 데이터를 즉시 내부 구조화된 복제 직렬화 알고리즘인 `StructuredSerialize(message)`를 통해 직렬화된 데이터 표현형으로 변환한다 [1]. 이 단계에서 소유권 이전 목록(transfer list)은 지원되지 않으므로 순수 복제만 진행된다 [1, 2].
