@@ -40,18 +40,20 @@ ResizeObserver의 콜백 실행 시점은 WHATWG HTML 이벤트 루프의 'Updat
 
 만약 콜백이 상위 조상 노드나 동일 깊이의 형제 노드 크기를 변경시켜 해당 렌더링 주기 내에서 처리할 수 없는 관찰 대상이 남게 되면(`skippedTargets`), 브라우저는 무한 루프와 탭 프리징을 방지하기 위해 해당 통지를 다음 렌더링 프레임으로 이월한다 [1][2]. 이와 동시에 `window` 객체에 `'ResizeObserver loop completed with undelivered notifications'`(또는 `'ResizeObserver loop limit exceeded'`) 에러 이벤트를 발생시킨다 [1][2].
 
-```mermaid
-sequenceDiagram
-    participant Loop as EventLoop
-    participant Layout as LayoutEngine
-    participant RO as ResizeObserver
-    participant Paint as PaintEngine
-    Loop->>Layout: Style 및 Layout 완료
-    Layout->>RO: active observations 전달
-    RO->>RO: gather active observations at depth
-    RO->>Layout: targetDepth 초과 노드 콜백 처리
-    RO->>Loop: skippedTargets 발생 시 에러 알림 및 이월
-    RO->>Paint: Paint 단계 진입
+```diagram
+종류: 시퀀스
+
+[EventLoop]
+[LayoutEngine]
+[ResizeObserver]
+[PaintEngine]
+
+EventLoop -> LayoutEngine : Style 및 Layout 완료
+LayoutEngine -> ResizeObserver : active observations 전달
+ResizeObserver -> ResizeObserver : gather active observations at depth
+ResizeObserver -> LayoutEngine : targetDepth 초과 노드 콜백 처리
+ResizeObserver -> EventLoop : skippedTargets 발생 시 에러 알림 및 이월
+ResizeObserver -> PaintEngine : Paint 단계 진입
 ```
 
 ## 4. 기본 사용법
