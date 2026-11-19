@@ -3,9 +3,11 @@
 // - dist/p/<YYMMDD>-<제목 해시 8자>.html 글(목록 · 이전 · 다음, 본문, 댓글)
 // - dist/p/assets/ 그림(글이 assets/<이름> 으로 부른다)
 // 모양은 Plugin Builder 내려받기 페이지(검은 바탕 · Pretendard · JetBrains Mono · 개발 일지 목록 · 글 쪽)를 따른다.
-// ```mermaid 블록은 브라우저에서 mermaid 11 이 그린다. 댓글은 giscus(GitHub Discussions, site.json 의 giscus 값이 있을 때만)
+// ```diagram 블록(옛 이름 ```flow)은 빌드 때 CC Usage 그리기 코드(diagram/, CC Usage 가 앱과 같게 맞춰 둔다)로 SVG 그림을 그린다.
+// ```mermaid 블록은 브라우저에서 mermaid 11 이 그린다(예전 글). 댓글은 giscus(GitHub Discussions, site.json 의 giscus 값이 있을 때만)
 import { createHash } from "node:crypto";
 import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { createContext, runInContext } from "node:vm";
 import { Marked } from "marked";
 
 const SITE = JSON.parse(readFileSync("site.json", "utf8"));
@@ -49,10 +51,28 @@ function parse(name, text) {
   };
 }
 
+/** CC Usage 의 diagram 그리기(diagram/*.js 를 vm 에 읽는다) → { html(글), css } 또는 null(파일이 없으면 코드 블록 그대로) */
+const diagram = (() => {
+  const files = ["common.js", "flow.js", "flow-seq.js", "flow-model.js"].map((f) => `diagram/${f}`);
+  if (!files.every((f) => existsSync(f))) return null;
+  const ctx = createContext({ Intl, Date, Math, document: { addEventListener() {} }, window: {} });
+  for (const f of files) runInContext(readFileSync(f, "utf8"), ctx, { filename: f });
+  let seq = 0;
+  return {
+    html(text) {
+      ctx.__text = text;
+      return runInContext(`memoFlowHtml(__text, ${seq++})`, ctx);
+    },
+    // 흐름도 CSS + 시퀀스 · 데이터 모델 CSS(flow-seq.js 의 FLOW_ALT_CSS)
+    css: runInContext('flowCss() + (typeof FLOW_ALT_CSS === "string" ? FLOW_ALT_CSS : "")', ctx),
+  };
+})();
+
 const marked = new Marked({
   gfm: true,
   renderer: {
     code({ text, lang }) {
+      if ((lang === "diagram" || lang === "flow") && diagram) return `<div class="dg">${diagram.html(text)}</div>\n`;
       if (lang === "mermaid") return `<pre class="mermaid">${esc(text)}</pre>\n`;
       return `<pre><code${lang ? ` class="lang-${esc(lang)}"` : ""}>${esc(text)}</code></pre>\n`;
     },
@@ -136,6 +156,9 @@ a { color: inherit; text-decoration: none; }
 .doc pre { padding: 14px 16px; overflow-x: auto; border: 1px solid var(--line-strong); border-radius: 8px; background: #0b0b0b; line-height: 1.6; }
 .doc pre code { padding: 0; background: none; font-size: 0.8125rem; }
 .doc pre.mermaid { display: flex; justify-content: center; background: var(--field); font-family: var(--mono); font-size: 0.75rem; color: var(--ink-3); }
+/* diagram 블록 그림: 색은 CC Usage 큰 화면(view.html)의 어두운 판(그리기 코드가 이 이름의 변수를 읽는다), 인쇄는 밝은 판 */
+.doc .dg { margin: 0 0 16px; overflow-x: auto; --bg: #0d0d0e; --panel: #18181a; --line: #2a2a2d; --line-strong: #3d3d42; --text: #ececec; --muted: #85858c; --primary: #fab283; --warn: #f5a742; --crit: #e06c75; }
+.doc .dg figure { margin: 0; }
 .doc blockquote { padding: 2px 16px; border-left: 2px solid var(--line-hover); color: var(--ink-2); }
 .doc table { display: block; width: max-content; max-width: 100%; overflow-x: auto; border-collapse: collapse; font-size: 0.875rem; }
 .doc th, .doc td { padding: 8px 12px; border: 1px solid var(--line-strong); vertical-align: top; text-align: left; }
@@ -159,6 +182,7 @@ footer { padding: 24px 0 48px; color: var(--ink-3); font-size: 0.8125rem; }
   .doc h2, .doc h3 { break-after: avoid; }
   .doc table { display: table; width: 100%; }
   .doc pre.mermaid { background: #fff; }
+  .doc .dg { --bg: #fff; --panel: #f6f6f7; --line: #e6e6e9; --line-strong: #d0d0d5; --text: #1a1a1a; --muted: #73737a; --primary: #3b7dd8; --warn: #b8741a; --crit: #c73a3f; }
 }
 @media (max-width: 640px) {
   :root { --gutter: 16px; }
@@ -185,7 +209,7 @@ const ICON = `data:image/svg+xml,${encodeURIComponent(MARK.replace('stroke="curr
 const PRINT =
   '<button type="button" class="print" onclick="window.print()" aria-label="인쇄"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M6 14h12v7H6z"/></svg><span>인쇄</span></button>';
 
-const page = (title, desc, root, body, extra = "", tools = "") => `<!doctype html>
+const page = (title, desc, root, body, extra = "", tools = "", head = "") => `<!doctype html>
 <html lang="ko">
 <head>
 <meta charset="utf-8">
@@ -196,7 +220,7 @@ const page = (title, desc, root, body, extra = "", tools = "") => `<!doctype htm
 <meta name="description" content="${esc(desc)}">
 <link rel="icon" href="${ICON}">
 ${FONTS}
-<style>${STYLE}</style>
+<style>${STYLE}</style>${head}
 </head>
 <body>
 <header class="bar"><a class="brand" href="${root}">${MARK}<span>${esc(SITE.title)}</span></a>${extra}<a class="gh" href="https://github.com/${esc(SITE.repo)}" target="_blank" rel="noreferrer">GitHub</a>${tools}</header>
@@ -227,15 +251,18 @@ function giscus() {
 }
 
 function postPage(p, newer, older) {
+  const doc = marked.parse(p.body);
+  // diagram 그림이 있는 글만 그리기 CSS 를 싣는다
+  const dgCss = diagram && doc.includes('<div class="dg">') ? `<style>${diagram.css}</style>` : "";
   const step = (q, word) => (q ? `<a href="${q.slug}.html" title="${esc(q.title)}">${word} ${esc(q.title)}</a>` : `<span class="off">${word}</span>`);
   const sub = [`<span class="date">${p.date}</span>`, p.area && `<span>${esc(p.area)}</span>`, p.minutes && `<span>읽는 시간 ${p.minutes}분</span>`].filter(Boolean).join("");
   const body =
     `<main class="wrap read"><nav class="nav" aria-label="글 이동"><a class="back" href="../">‹ 목록</a><span class="step">${step(older, "이전")}${step(newer, "다음")}</span></nav>` +
     `<article><header class="top"><h1>${esc(p.title)}</h1><div class="sub">${sub}</div>${p.summary ? `<p class="sum">${esc(p.summary)}</p>` : ""}</header>` +
-    `<div class="doc">${marked.parse(p.body)}</div></article>` +
+    `<div class="doc">${doc}</div></article>` +
     `<section class="talk" aria-label="댓글"><h2>댓글</h2>${giscus()}</section></main>` +
     `<script type="module">import m from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";const els=[...document.querySelectorAll("pre.mermaid")],src=els.map((e)=>e.textContent);const draw=async(theme)=>{m.initialize({startOnLoad:false,theme,securityLevel:"strict",fontFamily:getComputedStyle(document.body).fontFamily});els.forEach((e,i)=>{e.removeAttribute("data-processed");e.textContent=src[i];});await m.run({nodes:els});};draw("dark");addEventListener("beforeprint",()=>draw("default"));addEventListener("afterprint",()=>draw("dark"));</script>`;
-  return page(`${p.title} · ${SITE.title}`, p.summary || p.title, "../", body, `<span class="slash" aria-hidden="true">/</span><span class="here">${esc(p.date)}</span>`, PRINT);
+  return page(`${p.title} · ${SITE.title}`, p.summary || p.title, "../", body, `<span class="slash" aria-hidden="true">/</span><span class="here">${esc(p.date)}</span>`, PRINT, dgCss);
 }
 
 const names = existsSync(POSTS) ? readdirSync(POSTS).filter((n) => FILE.test(n)) : [];
