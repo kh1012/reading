@@ -28,24 +28,25 @@ Cache API의 객체 모델과 동작 범위를 규정하는 핵심 용어 및 �
 ## 3. 동작 원리
 Cache API는 브라우저 내부 I/O 스레드와 비동기 프로미스(Promise) 파이프라인을 통해 디스크에 접근한다. 주요 메서드가 계산되고 실행되는 명세상의 단계와 원리는 다음과 같다.
 
-```mermaid
-sequenceDiagram
-    participant Client
-    participant ServiceWorker
-    participant Cache
-    participant Network
-    Client->>ServiceWorker: fetch 이벤트 발생
-    ServiceWorker->>Cache: match(request)
-    alt 캐시 존재
-        Cache-->>ServiceWorker: cachedResponse 반환
-        ServiceWorker-->>Client: respondWith(cachedResponse)
-    else 캐시 없음
-        Cache-->>ServiceWorker: undefined 반환
-        ServiceWorker->>Network: fetch(request)
-        Network-->>ServiceWorker: networkResponse 반환
-        ServiceWorker->>Cache: put(request, clone)
-        ServiceWorker-->>Client: respondWith(networkResponse)
-    end
+```diagram
+종류: 시퀀스
+
+[Client]
+[ServiceWorker]
+[Cache]
+[Network]
+
+Client -> ServiceWorker : fetch 이벤트 발생
+ServiceWorker -> Cache : match(request)
+== 캐시 존재 ==
+Cache --> ServiceWorker : cachedResponse 반환
+ServiceWorker --> Client : respondWith(cachedResponse)
+== 캐시 없음 ==
+Cache --> ServiceWorker : undefined 반환
+ServiceWorker -> Network : fetch(request)
+Network --> ServiceWorker : networkResponse 반환
+ServiceWorker -> Cache : put(request, clone)
+ServiceWorker --> Client : respondWith(networkResponse)
 ```
 
 ### 1) 캐시 버킷 열기 (caches.open)
