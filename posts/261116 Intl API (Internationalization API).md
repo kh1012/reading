@@ -20,12 +20,20 @@ Intl API는 전역적으로 사용할 수 있는 내장 네임스페이스로, �
 ## 3. 동작 원리
 Intl API는 자체적으로 로케일 데이터를 모두 담고 있지 않습니다. 대신 운영체제와 브라우저 엔진에 이미 포함된 ICU(International Components for Unicode) 라이브러리를 활용합니다 [3]. 이를 통해 최신 유니코드 표준을 따르는 정확한 로케일 데이터를 보장하며, 브라우저 엔진 수준에서 최적화되어 동작하므로 우수한 성능을 제공합니다 [3].
 
-```mermaid
-flowchart LR
-    A[코드: Intl 호출] --> B[JS Engine]
-    B --> C[ICU 라이브러리]
-    C --> D[로케일 데이터 기반 변환]
-    D --> E[포맷된 문자열 반환]
+```diagram
+@align center
+@dir right
+
+[코드: Intl 호출]
+[JS Engine]
+[ICU 라이브러리]
+[로케일 데이터 기반 변환]
+[포맷된 문자열 반환]
+
+코드: Intl 호출 -> JS Engine
+JS Engine -> ICU 라이브러리
+ICU 라이브러리 -> 로케일 데이터 기반 변환
+로케일 데이터 기반 변환 -> 포맷된 문자열 반환
 ```
 
 Intl의 메서드들은 실행 시점에 해당 로케일 데이터가 런타임에 존재하는지 확인합니다. 이를 위해 Intl.supportedLocalesOf()를 제공하여 사전에 특정 로케일 지원 여부를 확인할 수 있습니다 [1].
