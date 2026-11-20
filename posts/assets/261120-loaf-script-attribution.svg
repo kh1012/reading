@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 270" width="640" height="270">
+  <rect width="640" height="270" fill="#ffffff"/>
+  <text x="20" y="28" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1f2937">PerformanceLongAnimationFrameTiming 엔트리와 PerformanceScriptTiming 귀속 구조</text>
+  
+  <!-- Parent LoAF Entry Box -->
+  <rect x="20" y="45" width="600" height="75" fill="#f3f4f6" stroke="#2563eb" stroke-width="1.5" rx="4"/>
+  <text x="32" y="68" font-family="sans-serif" font-size="13" font-weight="bold" fill="#2563eb">PerformanceLongAnimationFrameTiming 엔트리</text>
+  <text x="32" y="90" font-family="sans-serif" font-size="12" fill="#1f2937">duration: 110.0ms  |  blockingDuration: 60.0ms  |  renderStart: 45.0ms  |  styleAndLayoutStart: 70.0ms</text>
+  <text x="32" y="108" font-family="sans-serif" font-size="12" fill="#1f2937">scripts: PerformanceScriptTiming[] (프레임 내 5ms 이상 실행된 개별 스크립트 수집)</text>
+  
+  <!-- Connecting lines -->
+  <line x1="160" y1="120" x2="160" y2="145" stroke="#1f2937" stroke-width="1.5"/>
+  <line x1="480" y1="120" x2="480" y2="145" stroke="#1f2937" stroke-width="1.5"/>
+  
+  <!-- Script 1: Same Origin / CORS OK -->
+  <rect x="20" y="145" width="290" height="110" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5" rx="4"/>
+  <text x="32" y="168" font-family="sans-serif" font-size="13" font-weight="bold" fill="#16a34a">스크립트 1 (CORS 통과 / 동일 출처)</text>
+  <text x="32" y="188" font-family="sans-serif" font-size="12" fill="#1f2937">invokerType: "event-listener"</text>
+  <text x="32" y="206" font-family="sans-serif" font-size="12" fill="#1f2937">invoker: "button#checkout.onclick"</text>
+  <text x="32" y="224" font-family="sans-serif" font-size="12" fill="#1f2937">sourceURL: "https://example.com/bundle.js:142"</text>
+  <text x="32" y="242" font-family="sans-serif" font-size="12" fill="#16a34a">duration: 32.0ms (강제 레이아웃: 12.0ms)</text>
+  
+  <!-- Script 2: Cross Origin / Masked -->
+  <rect x="330" y="145" width="290" height="110" fill="#fef2f2" stroke="#dc2626" stroke-width="1.5" rx="4"/>
+  <text x="342" y="168" font-family="sans-serif" font-size="13" font-weight="bold" fill="#dc2626">스크립트 2 (CORS 헤더 누락 / 마스킹)</text>
+  <text x="342" y="188" font-family="sans-serif" font-size="12" fill="#1f2937">invokerType: "user-callback"</text>
+  <text x="342" y="206" font-family="sans-serif" font-size="12" fill="#1f2937">invoker: "setTimeout"</text>
+  <text x="342" y="224" font-family="sans-serif" font-size="12" fill="#dc2626">sourceURL: "" (보안 격리로 마스킹됨)</text>
+  <text x="342" y="242" font-family="sans-serif" font-size="12" fill="#dc2626">duration: 18.0ms (출처 정보 차단)</text>
+</svg>

@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 260" width="640" height="260">
+  <rect width="640" height="260" fill="#ffffff"/>
+  <text x="20" y="28" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1f2937">Long Animation Frame (LoAF) 타임라인 및 렌더링 파이프라인 단계 분할</text>
+  
+  <!-- Main timeline container -->
+  <rect x="20" y="55" width="600" height="70" fill="#f3f4f6" stroke="#1f2937" stroke-width="1.5" rx="4"/>
+  
+  <!-- Task & Script segment (0ms to 45ms) -->
+  <rect x="20" y="55" width="245" height="70" fill="#2563eb" fill-opacity="0.2" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="30" y="85" font-family="sans-serif" font-size="13" font-weight="bold" fill="#2563eb">자바스크립트 태스크 실행</text>
+  <text x="30" y="105" font-family="sans-serif" font-size="12" fill="#1f2937">이벤트 리스너, 타이머 콜백 등</text>
+  
+  <!-- Callback segment (45ms to 70ms) -->
+  <rect x="265" y="55" width="135" height="70" fill="#16a34a" fill-opacity="0.2" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="272" y="85" font-family="sans-serif" font-size="12" font-weight="bold" fill="#16a34a">콜백 실행 구간</text>
+  <text x="272" y="105" font-family="sans-serif" font-size="12" fill="#1f2937">rAF, IntersectionObs</text>
+  
+  <!-- Style & Layout segment (70ms to 110ms) -->
+  <rect x="400" y="55" width="220" height="70" fill="#dc2626" fill-opacity="0.15" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="410" y="85" font-family="sans-serif" font-size="12" font-weight="bold" fill="#dc2626">스타일 및 레이아웃 연산</text>
+  <text x="410" y="105" font-family="sans-serif" font-size="12" fill="#1f2937">Recalculate Style, Reflow, Paint</text>
+  
+  <!-- Time markers -->
+  <line x1="20" y1="130" x2="20" y2="140" stroke="#1f2937" stroke-width="1.5"/>
+  <text x="20" y="155" font-family="sans-serif" font-size="12" fill="#1f2937" text-anchor="middle">0ms</text>
+  
+  <!-- renderStart marker at 45ms -->
+  <line x1="265" y1="45" x2="265" y2="140" stroke="#16a34a" stroke-width="2" stroke-dasharray="4 2"/>
+  <text x="265" y="40" font-family="sans-serif" font-size="12" font-weight="bold" fill="#16a34a" text-anchor="middle">renderStart</text>
+  <text x="265" y="155" font-family="sans-serif" font-size="12" fill="#16a34a" text-anchor="middle">45ms</text>
+  
+  <!-- styleAndLayoutStart marker at 70ms -->
+  <line x1="400" y1="45" x2="400" y2="140" stroke="#dc2626" stroke-width="2" stroke-dasharray="4 2"/>
+  <text x="400" y="40" font-family="sans-serif" font-size="12" font-weight="bold" fill="#dc2626" text-anchor="middle">styleAndLayoutStart</text>
+  <text x="400" y="155" font-family="sans-serif" font-size="12" fill="#dc2626" text-anchor="middle">70ms</text>
+  
+  <!-- Frame end marker at 110ms -->
+  <line x1="620" y1="130" x2="620" y2="140" stroke="#1f2937" stroke-width="1.5"/>
+  <text x="590" y="155" font-family="sans-serif" font-size="12" fill="#1f2937" text-anchor="middle">110ms (총 duration)</text>
+  
+  <!-- 50ms Threshold marker -->
+  <line x1="292" y1="50" x2="292" y2="195" stroke="#dc2626" stroke-width="2"/>
+  <text x="292" y="210" font-family="sans-serif" font-size="12" font-weight="bold" fill="#dc2626" text-anchor="middle">50ms 기준 임계값</text>
+  
+  <!-- blockingDuration bracket (from x=292 to x=620) -->
+  <path d="M 292 225 L 292 235 L 620 235 L 620 225" fill="none" stroke="#dc2626" stroke-width="2"/>
+  <text x="456" y="250" font-family="sans-serif" font-size="13" font-weight="bold" fill="#dc2626" text-anchor="middle">blockingDuration = 60ms (duration 110ms - 50ms)</text>
+</svg>
