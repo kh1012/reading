@@ -450,3 +450,39 @@ function holdScroll(el, top) {
     requestAnimationFrame(put);
   });
 }
+
+// MARK: 목록에서 찾기(메모 목록 머리 찾기 칸, 2026-11-20 사용자 "SNB 노출된 항목들 중 문자열 검색")
+
+/** 찾을 글 → 낱말들(빈칸으로 나눔, 대소문자 무시) */
+const memoListTerms = (q) => String(q ?? "").toLowerCase().split(/\s+/).filter(Boolean);
+
+/** 글에 낱말이 모두 들었나(대소문자 무시) */
+const memoListMatch = (text, terms) => {
+  const t = String(text ?? "").toLowerCase();
+  return terms.every((w) => t.includes(w));
+};
+
+/** 글을 HTML 로(esc), 낱말이 든 곳은 <mark class="memo-hit"> 로 감싼다. 겹치거나 붙은 자리는 하나로 */
+function memoHitHtml(text, terms) {
+  const s = String(text ?? "");
+  const low = s.toLowerCase();
+  const spans = [];
+  for (const w of terms) {
+    if (!w) continue;
+    for (let i = low.indexOf(w); i >= 0; i = low.indexOf(w, i + 1)) spans.push([i, i + w.length]);
+  }
+  spans.sort((a, b) => a[0] - b[0]);
+  const merged = [];
+  for (const [a, b] of spans) {
+    const last = merged.at(-1);
+    if (last && a <= last[1]) last[1] = Math.max(last[1], b);
+    else merged.push([a, b]);
+  }
+  let out = "";
+  let at = 0;
+  for (const [a, b] of merged) {
+    out += `${esc(s.slice(at, a))}<mark class="memo-hit">${esc(s.slice(a, b))}</mark>`;
+    at = b;
+  }
+  return out + esc(s.slice(at));
+}
