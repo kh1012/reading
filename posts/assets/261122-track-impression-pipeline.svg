@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 380" width="100%" height="100%">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 1 L 6 5 L 0 9 z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="24" y="30" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1f2937">TrackImpression 렌더링 파이프라인 및 가시성 검증 단계</text>
+
+  <!-- Step 1 Box -->
+  <rect x="24" y="48" width="180" height="280" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <rect x="24" y="48" width="180" height="32" rx="8" fill="#2563eb"/>
+  <text x="114" y="69" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#ffffff">1. 브라우저 렌더링 틱</text>
+
+  <rect x="36" y="92" width="156" height="42" rx="4" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="114" y="112" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#1f2937">스타일 / 레이아웃 재계산</text>
+  <text x="114" y="126" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#64748b">Update the rendering</text>
+
+  <text x="114" y="152" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#64748b">↓</text>
+
+  <rect x="36" y="162" width="156" height="46" rx="4" fill="#eff6ff" stroke="#2563eb"/>
+  <text x="114" y="181" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#2563eb">Intersection Steps</text>
+  <text x="114" y="198" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#475569">W3C 명세 3.2.8 알고리즘</text>
+
+  <text x="114" y="226" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#64748b">↓</text>
+
+  <rect x="36" y="238" width="156" height="46" rx="4" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="114" y="258" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937">entries 슬라이스</text>
+  <text x="114" y="274" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#64748b">상태 전이 타깃만 배치 전달</text>
+
+  <!-- Step 2 Box -->
+  <rect x="230" y="48" width="180" height="280" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <rect x="230" y="48" width="180" height="32" rx="8" fill="#1f2937"/>
+  <text x="320" y="69" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#ffffff">2. 영역 교차 및 차폐 보정</text>
+
+  <rect x="242" y="92" width="156" height="42" rx="4" fill="#ffffff" stroke="#dc2626"/>
+  <text x="320" y="112" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#dc2626">고정 헤더 (-56px)</text>
+  <text x="320" y="126" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#64748b">rootMargin 음수 보정</text>
+
+  <text x="320" y="152" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#64748b">↓</text>
+
+  <rect x="242" y="162" width="156" height="46" rx="4" fill="#eff6ff" stroke="#2563eb"/>
+  <text x="320" y="181" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#2563eb">임계치 조건 판정</text>
+  <text x="320" y="198" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#475569">intersectionRatio ≥ 0.5</text>
+
+  <text x="320" y="226" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#64748b">↓</text>
+
+  <rect x="242" y="238" width="156" height="46" rx="4" fill="#ffffff" stroke="#94a3b8"/>
+  <text x="320" y="258" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#1f2937">isIntersecting 플래그</text>
+  <text x="320" y="274" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#64748b">뷰포트 진입 여부 판별</text>
+
+  <!-- Step 3 Box -->
+  <rect x="436" y="48" width="180" height="280" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <rect x="436" y="48" width="180" height="32" rx="8" fill="#16a34a"/>
+  <text x="526" y="69" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#ffffff">3. 체류 검증 및 로깅</text>
+
+  <rect x="448" y="92" width="156" height="42" rx="4" fill="#ffffff" stroke="#2563eb"/>
+  <text x="526" y="112" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#2563eb">체류 타이머 시작</text>
+  <text x="526" y="126" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#64748b">setTimeout 1000ms</text>
+
+  <text x="526" y="152" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#dc2626">이탈 시 clearTimeout</text>
+
+  <rect x="448" y="162" width="156" height="46" rx="4" fill="#ffffff" stroke="#16a34a"/>
+  <text x="526" y="181" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#16a34a">1초 연속 체류 달성</text>
+  <text x="526" y="198" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#475569">unobserve 즉시 해제</text>
+
+  <text x="526" y="226" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#64748b">↓</text>
+
+  <rect x="448" y="238" width="156" height="46" rx="4" fill="#eff6ff" stroke="#16a34a"/>
+  <text x="526" y="258" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="bold" fill="#16a34a">안전한 로그 전송</text>
+  <text x="526" y="274" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#475569">sendBeacon / keepalive</text>
+
+  <!-- Connectors -->
+  <path d="M 205 185 L 227 185" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M 411 185 L 433 185" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Footer note -->
+  <text x="320" y="355" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#64748b">W3C 명세 Section 3.2.8 및 MRC 표준(50% 면적, 1초 연속 체류) 기반 파이프라인</text>
+</svg>
