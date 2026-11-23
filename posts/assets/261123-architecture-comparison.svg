@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" width="640" height="320">
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <rect x="15" y="15" width="295" height="290" rx="6" fill="#ffffff" stroke="#1f2937" stroke-width="1.5"/>
+  <text x="30" y="42" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1f2937">WebSocket (단일 TCP 연결)</text>
+  <line x1="30" y1="52" x2="295" y2="52" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="30" y="75" font-family="sans-serif" font-size="12" fill="#1f2937">전송 계층: TCP (신뢰성 바이트 스트림)</text>
+  
+  <rect x="30" y="95" width="55" height="30" rx="4" fill="#16a34a"/>
+  <text x="57" y="114" font-family="sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">패킷 1</text>
+  <line x1="85" y1="110" x2="95" y2="110" stroke="#1f2937" stroke-width="1.5"/>
+  
+  <rect x="95" y="95" width="55" height="30" rx="4" fill="#dc2626"/>
+  <text x="122" y="114" font-family="sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">패킷 2</text>
+  <line x1="150" y1="110" x2="160" y2="110" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3,3"/>
+  
+  <rect x="160" y="95" width="55" height="30" rx="4" fill="#ffffff" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <text x="187" y="114" font-family="sans-serif" font-size="12" fill="#dc2626" text-anchor="middle">패킷 3</text>
+  <line x1="215" y1="110" x2="225" y2="110" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3,3"/>
+  
+  <rect x="225" y="95" width="55" height="30" rx="4" fill="#ffffff" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <text x="252" y="114" font-family="sans-serif" font-size="12" fill="#dc2626" text-anchor="middle">패킷 4</text>
+  
+  <rect x="30" y="140" width="265" height="50" rx="4" fill="#fef2f2" stroke="#dc2626" stroke-width="1"/>
+  <text x="40" y="160" font-family="sans-serif" font-size="12" font-weight="bold" fill="#dc2626">Head-of-Line Blocking 발생</text>
+  <text x="40" y="178" font-family="sans-serif" font-size="12" fill="#1f2937">패킷 2 유실 시 뒤따르는 패킷 3, 4 대기</text>
+  
+  <text x="30" y="215" font-family="sans-serif" font-size="12" fill="#1f2937">• 단일 연결 병목으로 전체 큐 전달 지연</text>
+  <text x="30" y="235" font-family="sans-serif" font-size="12" fill="#1f2937">• 스트림 분리 불가 및 네이티브 백프레셔 부재</text>
+  <text x="30" y="255" font-family="sans-serif" font-size="12" fill="#1f2937">• 지연 민감 데이터도 TCP 재전송 대기 강제</text>
+  <text x="30" y="275" font-family="sans-serif" font-size="12" fill="#dc2626">• 메인 스레드 지연 및 버퍼 오버플로우 위험</text>
+
+  <rect x="330" y="15" width="295" height="290" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="345" y="42" font-family="sans-serif" font-size="14" font-weight="bold" fill="#2563eb">WebTransport (HTTP/3 및 QUIC)</text>
+  <line x1="345" y1="52" x2="610" y2="52" stroke="#e5e7eb" stroke-width="1"/>
+  <text x="345" y="75" font-family="sans-serif" font-size="12" fill="#1f2937">전송 계층: QUIC / UDP (멀티플렉싱)</text>
+
+  <rect x="345" y="95" width="125" height="28" rx="4" fill="#eff6ff" stroke="#2563eb" stroke-width="1"/>
+  <text x="355" y="113" font-family="sans-serif" font-size="12" fill="#2563eb">스트림 A (독립 신뢰성)</text>
+  <rect x="480" y="95" width="60" height="28" rx="4" fill="#16a34a"/>
+  <text x="510" y="113" font-family="sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">도달</text>
+
+  <rect x="345" y="130" width="125" height="28" rx="4" fill="#fef2f2" stroke="#dc2626" stroke-width="1"/>
+  <text x="355" y="148" font-family="sans-serif" font-size="12" fill="#dc2626">스트림 B (패킷 손실)</text>
+  <rect x="480" y="130" width="60" height="28" rx="4" fill="#dc2626"/>
+  <text x="510" y="148" font-family="sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">B만 재전송</text>
+
+  <rect x="345" y="165" width="125" height="28" rx="4" fill="#eff6ff" stroke="#2563eb" stroke-width="1"/>
+  <text x="355" y="183" font-family="sans-serif" font-size="12" fill="#2563eb">스트림 C (독립 신뢰성)</text>
+  <rect x="480" y="165" width="60" height="28" rx="4" fill="#16a34a"/>
+  <text x="510" y="183" font-family="sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">정상 수신</text>
+
+  <rect x="345" y="200" width="125" height="28" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1"/>
+  <text x="355" y="218" font-family="sans-serif" font-size="12" fill="#16a34a">데이터그램 (비신뢰성)</text>
+  <rect x="480" y="200" width="60" height="28" rx="4" fill="#16a34a"/>
+  <text x="510" y="218" font-family="sans-serif" font-size="12" fill="#ffffff" text-anchor="middle">즉시 도달</text>
+
+  <rect x="345" y="238" width="265" height="52" rx="4" fill="#f0fdf4" stroke="#16a34a" stroke-width="1"/>
+  <text x="355" y="258" font-family="sans-serif" font-size="12" font-weight="bold" fill="#16a34a">HoL 블로킹 원천 차단</text>
+  <text x="355" y="276" font-family="sans-serif" font-size="12" fill="#1f2937">B 스트림 손실 시에도 A, C 스트림 및 Datagram 정상 처리</text>
+</svg>
