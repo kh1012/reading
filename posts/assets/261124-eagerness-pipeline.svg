@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 280" width="100%" height="100%">
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <text x="20" y="35" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1f2937">Speculation Rules Eagerness 트리거 단계</text>
+  <rect x="20" y="60" width="135" height="190" rx="6" fill="#ffffff" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="30" y="88" font-family="sans-serif" font-size="13" font-weight="bold" fill="#dc2626">immediate</text>
+  <text x="30" y="115" font-family="sans-serif" font-size="12" fill="#1f2937">규칙 파싱 즉시</text>
+  <text x="30" y="140" font-family="sans-serif" font-size="12" fill="#1f2937">지연 시간: 0ms</text>
+  <text x="30" y="180" font-family="sans-serif" font-size="12" fill="#1f2937">대역폭 소모 높음</text>
+  <text x="30" y="215" font-family="sans-serif" font-size="12" fill="#16a34a">즉시 탐색 보장</text>
+  <rect x="175" y="60" width="135" height="190" rx="6" fill="#ffffff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="185" y="88" font-family="sans-serif" font-size="13" font-weight="bold" fill="#2563eb">eager</text>
+  <text x="185" y="115" font-family="sans-serif" font-size="12" fill="#1f2937">조기 탐색 실행</text>
+  <text x="185" y="140" font-family="sans-serif" font-size="12" fill="#1f2937">광범위 사전 적재</text>
+  <text x="185" y="180" font-family="sans-serif" font-size="12" fill="#1f2937">주요 탐색 경로</text>
+  <text x="185" y="215" font-family="sans-serif" font-size="12" fill="#16a34a">우선순위 높음</text>
+  <rect x="330" y="60" width="135" height="190" rx="6" fill="#ffffff" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="340" y="88" font-family="sans-serif" font-size="13" font-weight="bold" fill="#16a34a">moderate</text>
+  <text x="340" y="115" font-family="sans-serif" font-size="12" fill="#1f2937">의도 감지 기반</text>
+  <text x="340" y="140" font-family="sans-serif" font-size="12" fill="#1f2937">200ms 이상 호버</text>
+  <text x="340" y="165" font-family="sans-serif" font-size="12" fill="#1f2937">또는 뷰포트 진입</text>
+  <text x="340" y="215" font-family="sans-serif" font-size="12" fill="#16a34a">비용 대비 최적</text>
+  <rect x="485" y="60" width="135" height="190" rx="6" fill="#ffffff" stroke="#1f2937" stroke-width="1.5"/>
+  <text x="495" y="88" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1f2937">conservative</text>
+  <text x="495" y="115" font-family="sans-serif" font-size="12" fill="#1f2937">클릭 직전 실행</text>
+  <text x="495" y="140" font-family="sans-serif" font-size="12" fill="#1f2937">pointerdown 또는</text>
+  <text x="495" y="165" font-family="sans-serif" font-size="12" fill="#1f2937">mousedown 시점</text>
+  <text x="495" y="215" font-family="sans-serif" font-size="12" fill="#16a34a">낭비 최소화</text>
+</svg>
